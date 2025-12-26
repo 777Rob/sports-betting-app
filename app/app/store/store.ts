@@ -1,6 +1,6 @@
 import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { LeagueType, Match, Team } from "./types";
+import { LeagueType, Match, Team } from "../types";
 import { v4 as uuidv4 } from "uuid";
 
 // State Interface

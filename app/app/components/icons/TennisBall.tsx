@@ -28,3 +28,5 @@ const TennisBall = () => (
     />
   </svg>
 );
+
+export default TennisBall;

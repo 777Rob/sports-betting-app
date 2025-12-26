@@ -1,4 +1,4 @@
-import { Match, Standing, Team } from "./types";
+import { Match, Standing, Team } from "../types";
 
 export const calculateStandings = (
   teams: Team[],
