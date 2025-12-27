@@ -1,14 +1,23 @@
-import React, { useMemo } from "react";
-import { useAppSelector } from "../store";
-import { LeagueType } from "../types";
-import { calculateStandings, getTeamName } from "../utils";
 import { Check, X } from "lucide-react";
+import { useMemo } from "react";
+import { useAppSelector } from "../store/store";
+import { LeagueType } from "../types";
+import Flag from "./Flag";
+import {
+  calculateStandings,
+  getTeamName,
+  getCountryCode,
+} from "../utils/utils";
 
 interface StandingsTableProps {
   league: LeagueType;
+  variant?: "table-centric" | "clean" | "sporty";
 }
 
-const StandingsTable: React.FC<StandingsTableProps> = ({ league }) => {
+const StandingsTable: React.FC<StandingsTableProps> = ({
+  league,
+  variant = "table-centric",
+}) => {
   const teams = useAppSelector((state) => state.app.teams);
   const matches = useAppSelector((state) => state.app.matches);
 
@@ -18,56 +27,117 @@ const StandingsTable: React.FC<StandingsTableProps> = ({ league }) => {
     return calculateStandings(leagueTeams, leagueMatches);
   }, [teams, matches, league]);
 
+  // Style Config
+  const styles = {
+    "table-centric": {
+      container:
+        "border border-gray-200 rounded-md overflow-hidden bg-white shadow-sm font-mono",
+      header: "bg-gray-100 border-b border-gray-200 text-gray-600 font-mono",
+      row: "border-b border-gray-100 text-gray-800 font-mono hover:bg-gray-50",
+      winIcon: <Check size={12} className="text-green-600" strokeWidth={3} />,
+      lossIcon: <X size={12} className="text-red-500" strokeWidth={3} />,
+      ptsClass: "text-gray-900",
+    },
+    clean: {
+      container: "bg-white font-sans",
+      header:
+        "bg-white border-b border-gray-50 text-gray-400 font-sans text-[10px] tracking-wider font-bold",
+      row: "border-b border-gray-50 text-gray-700 font-bold font-sans hover:bg-gray-50",
+      winIcon: (
+        <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-0.5"></div>
+      ),
+      lossIcon: (
+        <div className="w-1.5 h-1.5 rounded-full bg-gray-200 mt-0.5"></div>
+      ),
+      ptsClass: "text-[#2563eb] text-base", // Brighter blue
+    },
+    sporty: {
+      container: "bg-gray-900/50 rounded-lg overflow-hidden font-sporty",
+      header:
+        "bg-gray-800 text-gray-400 font-header tracking-wider text-[11px]",
+      row: "border-b border-gray-800 text-gray-200 hover:bg-white/5",
+      winIcon: <span className="text-euro-orange text-[10px]">W</span>,
+      lossIcon: <span className="text-gray-600 text-[10px]">L</span>,
+      ptsClass: "text-white text-lg",
+    },
+  };
+
+  const s = styles[variant];
+
   return (
-    <div className="w-full flex flex-col">
-      <div className="flex flex-col border border-gray-200 rounded-md overflow-hidden bg-white shadow-sm">
-        {/* Table Header - Fixed at top */}
-        <div className="grid grid-cols-12 gap-2 px-3 py-3 bg-gray-100 border-b border-gray-200 text-xs font-bold uppercase tracking-wider text-gray-600 font-mono z-10 relative">
-          <div className="col-span-5 pl-2">Player</div>
-          <div className="col-span-2 text-center">M</div>
+    <div className="w-full flex flex-col h-full">
+      <div className={`flex flex-col h-full ${s.container}`}>
+        {/* Table Header */}
+        <div
+          className={`grid grid-cols-12 gap-2 px-4 py-3 text-xs font-bold uppercase z-10 relative ${s.header}`}
+        >
+          <div className="col-span-5">Team</div>
+          <div className="col-span-2 text-center">P</div>
           <div className="col-span-2 text-center">W</div>
           <div className="col-span-2 text-center">L</div>
           <div className="col-span-1 text-center">Pts</div>
         </div>
 
-        {/* Table Body - Scrollable Area (Approx 7 rows height: ~380px) */}
-        <div className="bg-white overflow-y-auto max-h-[380px]">
-          {standings.map((stat, index) => (
-            <div
-              key={stat.teamId}
-              className="grid grid-cols-12 gap-2 px-3 py-4 border-b border-gray-100 last:border-0 items-center hover:bg-gray-50 transition-colors font-mono text-sm"
-            >
-              <div className="col-span-5 pl-2 truncate font-medium text-gray-800">
-                {getTeamName(teams, stat.teamId)}
-              </div>
+        {/* Table Body */}
+        <div className="overflow-y-auto flex-1 max-h-[300px]">
+          {standings.map((stat) => {
+            const teamName = getTeamName(teams, stat.teamId);
+            const countryCode = getCountryCode(teamName);
 
-              <div className="col-span-2 text-center text-gray-600">
-                {stat.played}
-              </div>
+            return (
+              <div
+                key={stat.teamId}
+                className={`grid grid-cols-12 gap-2 px-4 py-4 items-center transition-colors text-sm ${s.row}`}
+              >
+                <div className="col-span-5 truncate flex items-center gap-2">
+                  {variant === "sporty" && countryCode && (
+                    <Flag countryCode={countryCode} />
+                  )}
+                  <span className="truncate">{teamName}</span>
+                </div>
 
-              <div className="col-span-2 flex items-center justify-center gap-1 text-gray-800">
-                <span>{stat.wins}</span>
-                {stat.wins > 0 && (
-                  <Check size={12} className="text-green-600" strokeWidth={3} />
-                )}
-              </div>
+                <div className="col-span-2 text-center text-gray-400 text-xs font-normal">
+                  {stat.played}
+                </div>
 
-              <div className="col-span-2 flex items-center justify-center gap-1 text-gray-800">
-                <span>{stat.losses}</span>
-                {stat.losses > 0 && (
-                  <X size={12} className="text-red-500" strokeWidth={3} />
-                )}
-              </div>
+                <div className="col-span-2 flex items-center justify-center gap-1">
+                  <span
+                    className={`text-xs ${
+                      variant === "clean" ? "font-normal" : ""
+                    }`}
+                  >
+                    {stat.wins}
+                  </span>
+                  {stat.wins > 0 && s.winIcon}
+                </div>
 
-              <div className="col-span-1 text-center font-bold text-gray-900">
-                {stat.points}
+                <div className="col-span-2 flex items-center justify-center gap-1">
+                  <span
+                    className={`text-xs ${
+                      variant === "clean" ? "font-normal" : ""
+                    }`}
+                  >
+                    {stat.losses}
+                  </span>
+                  {stat.losses > 0 && s.lossIcon}
+                </div>
+
+                <div
+                  className={`col-span-1 text-center font-black ${s.ptsClass}`}
+                >
+                  {stat.points}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
 
           {standings.length === 0 && (
-            <div className="p-8 text-center text-gray-400 italic text-xs font-mono">
-              No matches recorded.
+            <div
+              className={`p-8 text-center italic text-xs ${
+                variant === "sporty" ? "text-gray-600" : "text-gray-400"
+              }`}
+            >
+              No data
             </div>
           )}
         </div>

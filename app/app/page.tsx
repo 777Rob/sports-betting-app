@@ -1,73 +1,90 @@
 "use client";
-import Basketball from "./components/icons/Basketball";
-import SoccerBall from "./components/icons/SoccerBall";
-import TennisBall from "./components/icons/TennisBall";
+import { useState } from "react";
+import CleanMinimalLayout from "./components/CleanMinimalLayout";
+import Basketball from "./components/icons/BasketballIcon";
+import SoccerBall from "./components/icons/SoccerIcon";
+import TennisBall from "./components/icons/TennisIcon";
 import MatchForm from "./components/MatchForm";
+import SportyEnergeticLayout from "./components/SportyEnergeticLayout";
 import StandingsTable from "./components/StandingsTable";
+import TableCentricLayout from "./components/TableCentricLayout";
 import TeamForm from "./components/TeamForm";
 import { LeagueType } from "./types";
+type Theme = "table-centric" | "clean-minimal" | "sporty-energetic";
 
-interface LeagueCardProps {
-  league: LeagueType;
-  title: string;
-  icon: React.ReactNode;
-}
+function App() {
+  const [currentTheme, setCurrentTheme] = useState<Theme>("table-centric");
 
-const LeagueCard: React.FC<LeagueCardProps> = ({ league, title, icon }) => {
-  return (
-    <div className="bg-white rounded-lg shadow-sm overflow-hidden flex flex-col w-full h-full border border-gray-200">
-      {/* Header */}
-      <div className="px-6 py-5 flex items-center gap-3 bg-[#004f30] text-white">
-        <div>{icon}</div>
-        <h2 className="text-xl font-bold tracking-wider font-mono">{title}</h2>
-      </div>
+  const renderLayout = () => {
+    switch (currentTheme) {
+      case "table-centric":
+        return <TableCentricLayout />;
+      case "clean-minimal":
+        return <CleanMinimalLayout />;
+      case "sporty-energetic":
+        return <SportyEnergeticLayout />;
+      default:
+        return <TableCentricLayout />;
+    }
+  };
 
-      {/* Body */}
-      <div className="p-6 flex-1 flex flex-col gap-8 bg-white">
-        {/* Actions Row */}
-        <div className="flex gap-4">
-          <div className="flex-1">
-            <TeamForm league={league} />
-          </div>
-          <div className="flex-1">
-            <MatchForm league={league} />
-          </div>
-        </div>
-
-        {/* Standings */}
-        <div className="flex-1">
-          <StandingsTable league={league} />
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default function Home() {
-  const leagues: Array<{
-    id: LeagueType;
-    title: string;
-    icon: React.ReactNode;
-  }> = [
-    { id: "premier", title: "Premier League", icon: <SoccerBall /> },
-    { id: "eurobasket", title: "Eurobasket", icon: <Basketball /> },
-    { id: "wimbledon", title: "Wimbledon", icon: <TennisBall /> },
-  ];
+  const getBackgroundClass = () => {
+    switch (currentTheme) {
+      case "table-centric":
+        return "bg-gray-50";
+      case "clean-minimal":
+        return "bg-white";
+      case "sporty-energetic":
+        return "bg-[#000d0a]"; // Very dark teal/black
+      default:
+        return "bg-gray-50";
+    }
+  };
 
   return (
-    <div className="min-h-screen w-full bg-gray-50 p-6 md:p-12 font-sans">
-      <div className="max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-          {leagues.map((lg) => (
-            <LeagueCard
-              key={lg.id}
-              league={lg.id}
-              title={lg.title}
-              icon={lg.icon}
-            />
-          ))}
+    <div
+      className={`min-h-screen w-full p-6 md:p-12 transition-colors duration-500 ${getBackgroundClass()}`}
+    >
+      {/* Theme Switcher */}
+      <div className="max-w-[1400px] mx-auto mb-10 flex justify-center">
+        <div className="bg-white/90 backdrop-blur-md p-1 rounded-full border border-gray-200 shadow-sm flex gap-1 sticky top-4 z-50 overflow-hidden">
+          <button
+            onClick={() => setCurrentTheme("table-centric")}
+            className={`px-5 py-2 rounded-full text-xs font-bold transition-all ${
+              currentTheme === "table-centric"
+                ? "bg-[#004f30] text-white shadow-md"
+                : "text-gray-500 hover:bg-gray-100"
+            }`}
+          >
+            Original
+          </button>
+          <button
+            onClick={() => setCurrentTheme("clean-minimal")}
+            className={`px-5 py-2 rounded-full text-xs font-bold transition-all ${
+              currentTheme === "clean-minimal"
+                ? "bg-[#37013d] text-white shadow-md"
+                : "text-gray-500 hover:bg-gray-100"
+            }`}
+          >
+            Clean & Minimal
+          </button>
+          <button
+            onClick={() => setCurrentTheme("sporty-energetic")}
+            className={`px-5 py-2 rounded-full text-xs font-bold transition-all ${
+              currentTheme === "sporty-energetic"
+                ? "bg-[#fe6800] text-white shadow-md"
+                : "text-gray-500 hover:bg-gray-100"
+            }`}
+          >
+            Sporty
+          </button>
         </div>
       </div>
+
+      {/* Layout Content */}
+      <div className="max-w-[1400px] mx-auto">{renderLayout()}</div>
     </div>
   );
 }
+
+export default App;

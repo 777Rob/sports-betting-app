@@ -1,5 +1,5 @@
 import { appSlice, store, addTeam, addMatch, resetData } from "./store";
-import { calculateStandings } from "./utils";
+import { calculateStandings } from "../utils/utils";
 
 // Fix for TypeScript error: "Cannot use namespace 'jest' as a value"
 declare var jest: any;
