@@ -1,4 +1,4 @@
-const SoccerBall = () => (
+const SoccerIcon = () => (
   <svg
     width="24"
     height="24"
@@ -10,4 +10,4 @@ const SoccerBall = () => (
   </svg>
 );
 
-export default SoccerBall;
+export default SoccerIcon;

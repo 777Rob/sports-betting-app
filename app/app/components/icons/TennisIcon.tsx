@@ -1,4 +1,4 @@
-const Basketball = () => (
+const TennisIcon = () => (
   <svg
     width="24"
     height="24"
@@ -14,20 +14,19 @@ const Basketball = () => (
       strokeWidth="2"
       fill="none"
     />
-    <path d="M12 2C12 2 12 22 12 22" stroke="currentColor" strokeWidth="2" />
-    <path d="M2 12C2 12 22 12 22 12" stroke="currentColor" strokeWidth="2" />
     <path
-      d="M19.5 4.5C19.5 4.5 16 8 16 12C16 16 19.5 19.5 19.5 19.5"
+      d="M6 3.5C6 3.5 10 8 10 12C10 16 6 20.5 6 20.5"
       stroke="currentColor"
       strokeWidth="2"
       fill="none"
     />
     <path
-      d="M4.5 4.5C4.5 4.5 8 8 8 12C8 16 4.5 19.5 4.5 19.5"
+      d="M18 3.5C18 3.5 14 8 14 12C14 16 18 20.5 18 20.5"
       stroke="currentColor"
       strokeWidth="2"
       fill="none"
     />
   </svg>
 );
-export default Basketball;
+
+export default TennisIcon;

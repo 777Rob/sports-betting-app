@@ -1,8 +1,8 @@
-import { Check, X } from "lucide-react";
-import { useMemo } from "react";
-import { useAppSelector } from "../store/store";
-import { calculateStandings, getTeamName } from "../store/utils";
+import React, { useMemo } from "react";
+import { useAppSelector } from "../store";
 import { LeagueType } from "../types";
+import { calculateStandings, getTeamName } from "../utils";
+import { Check, X } from "lucide-react";
 
 interface StandingsTableProps {
   league: LeagueType;
@@ -19,10 +19,10 @@ const StandingsTable: React.FC<StandingsTableProps> = ({ league }) => {
   }, [teams, matches, league]);
 
   return (
-    <div className="w-full">
-      <div className="overflow-hidden">
-        {/* Table Header */}
-        <div className="grid grid-cols-12 gap-2 px-3 py-3 bg-gray-100 rounded-t-md text-xs font-bold uppercase tracking-wider text-gray-600 font-mono">
+    <div className="w-full flex flex-col">
+      <div className="flex flex-col border border-gray-200 rounded-md overflow-hidden bg-white shadow-sm">
+        {/* Table Header - Fixed at top */}
+        <div className="grid grid-cols-12 gap-2 px-3 py-3 bg-gray-100 border-b border-gray-200 text-xs font-bold uppercase tracking-wider text-gray-600 font-mono z-10 relative">
           <div className="col-span-5 pl-2">Player</div>
           <div className="col-span-2 text-center">M</div>
           <div className="col-span-2 text-center">W</div>
@@ -30,12 +30,12 @@ const StandingsTable: React.FC<StandingsTableProps> = ({ league }) => {
           <div className="col-span-1 text-center">Pts</div>
         </div>
 
-        {/* Table Body */}
-        <div className="bg-white">
+        {/* Table Body - Scrollable Area (Approx 7 rows height: ~380px) */}
+        <div className="bg-white overflow-y-auto max-h-[380px]">
           {standings.map((stat, index) => (
             <div
               key={stat.teamId}
-              className="grid grid-cols-12 gap-2 px-3 py-4 border-b border-gray-100 items-center hover:bg-gray-50 transition-colors font-mono text-sm"
+              className="grid grid-cols-12 gap-2 px-3 py-4 border-b border-gray-100 last:border-0 items-center hover:bg-gray-50 transition-colors font-mono text-sm"
             >
               <div className="col-span-5 pl-2 truncate font-medium text-gray-800">
                 {getTeamName(teams, stat.teamId)}
