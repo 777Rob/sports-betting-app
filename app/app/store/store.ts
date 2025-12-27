@@ -3,7 +3,6 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { LeagueType, Match, Team } from "../types";
 import { v4 as uuidv4 } from "uuid";
 
-// State Interface
 interface AppState {
   teams: Team[];
   matches: Match[];
@@ -40,7 +39,7 @@ const defaultMatches: Match[] = [
     homeScore: 2,
     awayScore: 1,
     league: "premier",
-    date: new Date().toISOString(),
+    date: "2024-01-15T14:30:00.000Z",
   },
   {
     id: "m2",
@@ -49,7 +48,7 @@ const defaultMatches: Match[] = [
     homeScore: 82,
     awayScore: 77,
     league: "eurobasket",
-    date: new Date().toISOString(),
+    date: "2024-01-16T18:00:00.000Z",
   },
   {
     id: "m3",
@@ -58,7 +57,7 @@ const defaultMatches: Match[] = [
     homeScore: 71,
     awayScore: 71,
     league: "eurobasket",
-    date: new Date(Date.now() - 100000).toISOString(),
+    date: "2024-01-14T16:45:00.000Z",
   },
   {
     id: "w_m1",
@@ -67,37 +66,16 @@ const defaultMatches: Match[] = [
     homeScore: 3,
     awayScore: 2,
     league: "wimbledon",
-    date: new Date().toISOString(),
+    date: "2024-01-12T10:00:00.000Z",
   },
 ];
 
-// Load from LocalStorage
-const loadState = (): AppState => {
-  try {
-    const serializedState = localStorage.getItem("sports-standings-redux");
-    if (serializedState === null) {
-      return {
-        teams: defaultTeams,
-        matches: defaultMatches,
-        currentLeague: "premier",
-      };
-    }
-    const loaded = JSON.parse(serializedState);
-    return {
-      teams: loaded.teams || defaultTeams,
-      matches: loaded.matches || defaultMatches,
-      currentLeague: loaded.currentLeague || "premier",
-    };
-  } catch (err) {
-    return {
-      teams: defaultTeams,
-      matches: defaultMatches,
-      currentLeague: "premier",
-    };
-  }
+// Initial state must be deterministic (same on server and client) to prevent hydration errors
+const initialState: AppState = {
+  teams: defaultTeams,
+  matches: defaultMatches,
+  currentLeague: "premier",
 };
-
-const initialState: AppState = loadState();
 
 // Redux Slice
 export const appSlice = createSlice({
@@ -142,10 +120,14 @@ export const appSlice = createSlice({
     setLeague: (state, action: PayloadAction<LeagueType>) => {
       state.currentLeague = action.payload;
     },
+    hydrateState: (state, action: PayloadAction<AppState>) => {
+      return action.payload;
+    },
   },
 });
 
-export const { addTeam, addMatch, resetData, setLeague } = appSlice.actions;
+export const { addTeam, addMatch, resetData, setLeague, hydrateState } =
+  appSlice.actions;
 
 // Configure Store
 export const store = configureStore({
@@ -158,8 +140,10 @@ export const store = configureStore({
 store.subscribe(() => {
   try {
     const state = store.getState();
-    const serializedState = JSON.stringify(state.app);
-    localStorage.setItem("sports-standings-redux", serializedState);
+    if (typeof window !== "undefined") {
+      const serializedState = JSON.stringify(state.app);
+      localStorage.setItem("sports-standings-redux", serializedState);
+    }
   } catch {
     // Ignore write errors
   }
