@@ -1,1 +1,22 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --font-sporty: "Montserrat", sans-serif;
+  --font-header: "Bebas Neue", sans-serif;
+  --font-mono: "Space Mono", monospace;
+
+  --color-clean-header: #37013d;
+  --color-clean-bg: #f8fafb;
+  --color-clean-blue: #2463eb;
+  --color-clean-gray: #efeeef;
+  --color-clean-border: #efeeef;
+
+  --color-sporty-bg: #002f26;
+  --color-sporty-card: #01201c;
+  --color-sporty-orange: #ff6901;
+
+  --color-table-green: #016733;
+  --color-table-purple: #43075b;
+  --color-table-bg: #f3f5f6;
+}
