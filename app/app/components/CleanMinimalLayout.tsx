@@ -11,9 +11,9 @@ interface LeagueCardProps {
 
 const LeagueCard: React.FC<LeagueCardProps> = ({ league, title, subtitle }) => {
   return (
-    <div className="bg-white rounded-lg shadow-xl overflow-hidden flex flex-col w-full h-full border border-gray-100">
+    <div className="bg-white rounded-lg shadow-xl overflow-hidden flex flex-col w-full h-full border border-clean-border">
       {/* Header */}
-      <div className="px-6 py-4 bg-[#37013d] border-b border-gray-100">
+      <div className="px-6 py-4 bg-clean-header border-b border-clean-border">
         <h2 className="text-xl font-bold text-white tracking-tight">{title}</h2>
       </div>
 
@@ -25,8 +25,8 @@ const LeagueCard: React.FC<LeagueCardProps> = ({ league, title, subtitle }) => {
             league={league}
             mode="inline"
             containerClass="bg-white p-0 rounded-none border-none"
-            inputClass="bg-[#333333] border-none text-white placeholder-gray-500 text-sm py-3 px-4 rounded"
-            saveButtonClass="bg-[#8ba4f9] hover:bg-[#7290f5] text-white font-bold rounded shadow-sm"
+            inputClass="bg-clean-bg border-none text-gray-800 placeholder-gray-400 text-sm py-3 px-4 rounded"
+            saveButtonClass="bg-clean-blue hover:bg-blue-600 text-white font-bold rounded shadow-sm"
             labelClass="text-gray-900 font-bold text-[11px] uppercase tracking-wider mb-2 block"
           />
         </div>
@@ -37,15 +37,15 @@ const LeagueCard: React.FC<LeagueCardProps> = ({ league, title, subtitle }) => {
             league={league}
             mode="inline"
             containerClass="bg-white p-0 rounded-none border-none"
-            inputClass="bg-[#333333] border-none text-white placeholder-gray-500 text-sm py-3 px-4 rounded"
-            saveButtonClass="bg-[#8ba4f9] hover:bg-[#7290f5] text-white font-bold rounded shadow-sm py-3"
+            inputClass="bg-clean-bg border-none text-gray-800 placeholder-gray-400 text-sm py-3 px-4 rounded"
+            saveButtonClass="bg-clean-blue hover:bg-blue-600 text-white font-bold rounded shadow-sm py-3"
             labelClass="text-gray-900 font-bold text-[11px] uppercase tracking-wider mb-2 block"
           />
         </div>
 
         {/* Section 3: Table */}
-        <div className="border rounded-md border-gray-100 mt-2">
-          <div className="bg-gray-50 px-4 py-3 border-b border-gray-100 text-[10px] font-bold text-gray-500 uppercase tracking-wider">
+        <div className="border rounded-md border-clean-border mt-2">
+          <div className="bg-clean-bg px-4 py-3 border-b border-clean-border text-[10px] font-bold text-gray-500 uppercase tracking-wider">
             Standings
           </div>
           <StandingsTable league={league} variant="clean" />
@@ -63,7 +63,7 @@ const CleanMinimalLayout = () => {
   ];
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start max-w-[1400px] mx-auto animate-in fade-in duration-500">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start max-w-[1400px] mx-auto animate-in fade-in duration-500 font-sans">
       {leagues.map((lg) => (
         <LeagueCard
           key={lg.id}

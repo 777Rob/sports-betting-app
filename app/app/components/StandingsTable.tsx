@@ -34,29 +34,29 @@ const StandingsTable: React.FC<StandingsTableProps> = ({
         "border border-gray-200 rounded-md overflow-hidden bg-white shadow-sm font-mono",
       header: "bg-gray-100 border-b border-gray-200 text-gray-600 font-mono",
       row: "border-b border-gray-100 text-gray-800 font-mono hover:bg-gray-50",
-      winIcon: <Check size={12} className="text-green-600" strokeWidth={3} />,
+      winIcon: <Check size={12} className="text-table-green" strokeWidth={3} />,
       lossIcon: <X size={12} className="text-red-500" strokeWidth={3} />,
       ptsClass: "text-gray-900",
     },
     clean: {
       container: "bg-white font-sans",
       header:
-        "bg-white border-b border-gray-50 text-gray-400 font-sans text-[10px] tracking-wider font-bold",
-      row: "border-b border-gray-50 text-gray-700 font-bold font-sans hover:bg-gray-50",
+        "bg-white border-b border-clean-border text-gray-400 font-sans text-[10px] tracking-wider font-bold",
+      row: "border-b border-clean-border text-gray-700 font-bold font-sans hover:bg-clean-bg",
       winIcon: (
-        <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-0.5"></div>
+        <div className="w-1.5 h-1.5 rounded-full bg-clean-blue mt-0.5"></div>
       ),
       lossIcon: (
         <div className="w-1.5 h-1.5 rounded-full bg-gray-200 mt-0.5"></div>
       ),
-      ptsClass: "text-[#2563eb] text-base", // Brighter blue
+      ptsClass: "text-clean-blue text-base",
     },
     sporty: {
-      container: "bg-gray-900/50 rounded-lg overflow-hidden font-sporty",
+      container: "bg-sporty-bg/30 rounded-lg overflow-hidden font-sporty",
       header:
-        "bg-gray-800 text-gray-400 font-header tracking-wider text-[11px]",
+        "bg-sporty-bg text-gray-400 font-header tracking-wider text-[11px]",
       row: "border-b border-gray-800 text-gray-200 hover:bg-white/5",
-      winIcon: <span className="text-euro-orange text-[10px]">W</span>,
+      winIcon: <span className="text-sporty-orange text-[10px]">W</span>,
       lossIcon: <span className="text-gray-600 text-[10px]">L</span>,
       ptsClass: "text-white text-lg",
     },

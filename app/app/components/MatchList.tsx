@@ -31,7 +31,7 @@ const MatchList: React.FC<MatchListProps> = ({ league }) => {
             className="flex items-center justify-between text-sm py-1 border-b border-gray-800 pb-1 gap-2"
           >
             <div className="flex items-center gap-2 flex-1 min-w-0">
-              <span className="w-1 h-3 bg-euro-orange rounded-full shrink-0"></span>
+              <span className="w-1 h-3 bg-sporty-orange rounded-full shrink-0"></span>
 
               <div className="flex items-center gap-1.5 flex-1 min-w-0">
                 {homeCode && <Flag countryCode={homeCode} />}

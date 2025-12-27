@@ -16,7 +16,7 @@ const LeagueCard: React.FC<LeagueCardProps> = ({ league, title, icon }) => {
   return (
     <div className="bg-white rounded-lg shadow-sm overflow-hidden flex flex-col w-full h-full border border-gray-200">
       {/* Header */}
-      <div className="px-6 py-5 flex items-center gap-3 bg-[#004f30] text-white">
+      <div className="px-6 py-5 flex items-center gap-3 bg-table-green text-white">
         <div>{icon}</div>
         <h2 className="text-xl font-bold tracking-wider font-mono">{title}</h2>
       </div>
@@ -26,10 +26,22 @@ const LeagueCard: React.FC<LeagueCardProps> = ({ league, title, icon }) => {
         {/* Actions Row */}
         <div className="flex gap-4">
           <div className="flex-1">
-            <TeamForm league={league} />
+            <TeamForm
+              league={league}
+              buttonClass="bg-table-green text-white hover:bg-[#003822] font-mono text-xs uppercase tracking-wider font-bold"
+              containerClass="bg-white p-6 rounded-lg shadow-2xl border-t-4 border-table-green"
+              inputClass="border-gray-300 bg-white text-gray-900 focus:border-table-green focus:ring-table-green font-mono"
+              saveButtonClass="bg-table-green hover:bg-[#003822] text-white font-mono uppercase tracking-widest"
+            />
           </div>
           <div className="flex-1">
-            <MatchForm league={league} />
+            <MatchForm
+              league={league}
+              buttonClass="bg-table-purple text-white hover:bg-[#2d053d] font-mono text-xs uppercase tracking-wider font-bold"
+              containerClass="bg-white p-6 rounded-lg shadow-2xl border-t-4 border-table-purple"
+              inputClass="border-gray-300 bg-white text-gray-900 focus:border-table-purple focus:ring-table-purple font-mono"
+              saveButtonClass="bg-table-purple hover:bg-[#2d053d] text-white font-mono uppercase tracking-widest"
+            />
           </div>
         </div>
 
@@ -54,7 +66,7 @@ const TableCentricLayout = () => {
   ];
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start animate-in fade-in duration-500">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start animate-in fade-in duration-500 font-mono">
       {leagues.map((lg) => (
         <LeagueCard
           key={lg.id}

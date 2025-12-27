@@ -31,11 +31,11 @@ function App() {
   const getBackgroundClass = () => {
     switch (currentTheme) {
       case "table-centric":
-        return "bg-gray-50";
+        return "bg-table-bg";
       case "clean-minimal":
-        return "bg-white";
+        return "bg-clean-bg";
       case "sporty-energetic":
-        return "bg-[#000d0a]"; // Very dark teal/black
+        return "bg-sporty-bg";
       default:
         return "bg-gray-50";
     }
@@ -52,17 +52,17 @@ function App() {
             onClick={() => setCurrentTheme("table-centric")}
             className={`px-5 py-2 rounded-full text-xs font-bold transition-all ${
               currentTheme === "table-centric"
-                ? "bg-[#004f30] text-white shadow-md"
+                ? "bg-table-green text-white shadow-md"
                 : "text-gray-500 hover:bg-gray-100"
             }`}
           >
-            Original
+            Table Centric
           </button>
           <button
             onClick={() => setCurrentTheme("clean-minimal")}
             className={`px-5 py-2 rounded-full text-xs font-bold transition-all ${
               currentTheme === "clean-minimal"
-                ? "bg-[#37013d] text-white shadow-md"
+                ? "bg-clean-header text-white shadow-md"
                 : "text-gray-500 hover:bg-gray-100"
             }`}
           >
@@ -72,7 +72,7 @@ function App() {
             onClick={() => setCurrentTheme("sporty-energetic")}
             className={`px-5 py-2 rounded-full text-xs font-bold transition-all ${
               currentTheme === "sporty-energetic"
-                ? "bg-[#fe6800] text-white shadow-md"
+                ? "bg-sporty-orange text-white shadow-md"
                 : "text-gray-500 hover:bg-gray-100"
             }`}
           >
@@ -86,5 +86,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

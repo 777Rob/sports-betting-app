@@ -14,7 +14,7 @@ interface LeagueCardProps {
 
 const LeagueCard: React.FC<LeagueCardProps> = ({ league, title, icon }) => {
   return (
-    <div className="bg-[#011613] rounded-lg shadow-2xl overflow-hidden flex flex-col w-full h-full border border-gray-800">
+    <div className="bg-sporty-card rounded-lg shadow-2xl overflow-hidden flex flex-col w-full h-full border border-gray-800">
       {/* Header */}
       <div className="px-6 py-5 flex items-center gap-3 border-b border-gray-800">
         <div className="text-white">{icon}</div>
@@ -23,25 +23,29 @@ const LeagueCard: React.FC<LeagueCardProps> = ({ league, title, icon }) => {
         </h2>
       </div>
 
-      <div className="p-6 flex-1 flex flex-col gap-8">
+      <div className="p-6 pb-12 flex-1 flex flex-col gap-8">
         {/* Col 1: Action Buttons */}
-        <div className="grid grid-cols-2 gap-3">
-          <TeamForm
-            league={league}
-            buttonClass="bg-[#fe6800] text-white hover:bg-orange-600 font-header text-lg uppercase tracking-wider py-2"
-            containerClass="bg-gray-900 border border-gray-700 text-white"
-            labelClass="text-euro-orange font-header"
-            inputClass="bg-gray-800 border-gray-700 text-white focus:border-euro-orange"
-            saveButtonClass="bg-[#fe6800] hover:bg-orange-600 text-white font-header"
-          />
-          <MatchForm
-            league={league}
-            buttonClass="bg-[#fe6800] text-white hover:bg-orange-600 font-header text-lg uppercase tracking-wider py-2"
-            containerClass="bg-gray-900 border border-gray-700 text-white"
-            labelClass="text-euro-orange font-header"
-            inputClass="bg-gray-800 border-gray-700 text-white focus:border-euro-orange"
-            saveButtonClass="bg-[#fe6800] hover:bg-orange-600 text-white font-header"
-          />
+        <div className="flex justify-between items-center">
+          <div className="w-[42%]">
+            <TeamForm
+              league={league}
+              buttonClass="bg-sporty-orange text-white hover:bg-orange-600 font-header text-sm uppercase tracking-wider py-2 w-full"
+              containerClass="bg-sporty-card border border-gray-700 text-white p-8 rounded-xl shadow-2xl"
+              labelClass="text-sporty-orange font-header"
+              inputClass="bg-sporty-bg border-gray-700 text-white focus:border-sporty-orange"
+              saveButtonClass="bg-sporty-orange hover:bg-orange-600 text-white font-header"
+            />
+          </div>
+          <div className="w-[42%]">
+            <MatchForm
+              league={league}
+              buttonClass="bg-sporty-orange text-white hover:bg-orange-600 font-header text-sm uppercase tracking-wider py-2 w-full"
+              containerClass="bg-sporty-card border border-gray-700 text-white p-8 rounded-xl shadow-2xl"
+              labelClass="text-sporty-orange font-header"
+              inputClass="bg-sporty-bg border-gray-700 text-white focus:border-sporty-orange"
+              saveButtonClass="bg-sporty-orange hover:bg-orange-600 text-white font-header"
+            />
+          </div>
         </div>
 
         {/* Col 2: Match Results */}
@@ -76,7 +80,7 @@ const SportyEnergeticLayout = () => {
   ];
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start animate-in zoom-in-95 duration-500">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start animate-in zoom-in-95 duration-500 font-sporty">
       {leagues.map((lg) => (
         <LeagueCard
           key={lg.id}
