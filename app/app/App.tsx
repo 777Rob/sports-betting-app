@@ -59,7 +59,7 @@ function App() {
         <div className="bg-white/90 backdrop-blur-md p-1 rounded-full border border-gray-200 shadow-sm flex gap-1 sticky top-4 z-50 overflow-hidden">
           <button
             onClick={() => setCurrentTheme("table-centric")}
-            className={`px-5 py-2 rounded-full text-xs font-bold transition-all ${
+            className={`px-5 cursor-pointer py-2 rounded-full text-xs font-bold transition-all ${
               currentTheme === "table-centric"
                 ? "bg-table-green text-white shadow-md"
                 : "text-gray-500 hover:bg-gray-100"
@@ -69,7 +69,7 @@ function App() {
           </button>
           <button
             onClick={() => setCurrentTheme("clean-minimal")}
-            className={`px-5 py-2 rounded-full text-xs font-bold transition-all ${
+            className={`px-5 cursor-pointer py-2 rounded-full text-xs font-bold transition-all ${
               currentTheme === "clean-minimal"
                 ? "bg-clean-header text-white shadow-md"
                 : "text-gray-500 hover:bg-gray-100"
@@ -79,7 +79,7 @@ function App() {
           </button>
           <button
             onClick={() => setCurrentTheme("sporty-energetic")}
-            className={`px-5 py-2 rounded-full text-xs font-bold transition-all ${
+            className={`px-5 cursor-pointer py-2 rounded-full text-xs font-bold transition-all ${
               currentTheme === "sporty-energetic"
                 ? "bg-sporty-orange text-white shadow-md"
                 : "text-gray-500 hover:bg-gray-100"
