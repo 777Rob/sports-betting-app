@@ -4,6 +4,8 @@ A robust Single Page Application (SPA) built to manage sports tournaments across
 
 Built with **Next.js**, **React**, **Redux Toolkit**, **TypeScript**, and **Tailwind CSS v4**.
 
+# Deployment link: [Sports Standings Manager](https://sports-betting-app-ten.vercel.app/)
+
 ## 🚀 Features
 
 - **Multi-League Support**: Manage Premier League (Football), Eurobasket (Basketball), and Wimbledon (Tennis) simultaneously.
