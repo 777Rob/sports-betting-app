@@ -57,7 +57,7 @@ An immersive dark-mode style theme using `Montserrat` and `Bebas Neue`. Features
 1. **Clone the repository**
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/777Rob/sports-betting-app
    cd sports-betting-app
    cd app
    ```
