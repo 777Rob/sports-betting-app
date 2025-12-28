@@ -117,6 +117,13 @@ export const appSlice = createSlice({
       state.matches = [];
       state.currentLeague = "premier";
     },
+    resetToDemo: (state) => {
+      // Use JSON parse/stringify for a simple deep copy to ensure we break references
+      // This prevents any potential mutation issues with the default arrays
+      state.teams = JSON.parse(JSON.stringify(defaultTeams));
+      state.matches = JSON.parse(JSON.stringify(defaultMatches));
+      state.currentLeague = "premier";
+    },
     setLeague: (state, action: PayloadAction<LeagueType>) => {
       state.currentLeague = action.payload;
     },
@@ -126,8 +133,14 @@ export const appSlice = createSlice({
   },
 });
 
-export const { addTeam, addMatch, resetData, setLeague, hydrateState } =
-  appSlice.actions;
+export const {
+  addTeam,
+  addMatch,
+  resetData,
+  resetToDemo,
+  setLeague,
+  hydrateState,
+} = appSlice.actions;
 
 // Configure Store
 export const store = configureStore({
