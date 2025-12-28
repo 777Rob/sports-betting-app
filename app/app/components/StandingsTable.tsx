@@ -36,6 +36,7 @@ const StandingsTable: React.FC<StandingsTableProps> = ({
       row: "border-b border-gray-100 text-gray-800 font-mono hover:bg-gray-50",
       winIcon: <Check size={12} className="text-table-green" strokeWidth={3} />,
       lossIcon: <X size={12} className="text-red-500" strokeWidth={3} />,
+      drawIcon: <Minus size={12} className="text-gray-400" strokeWidth={3} />,
       ptsClass: "text-gray-900",
     },
     clean: {
@@ -49,6 +50,9 @@ const StandingsTable: React.FC<StandingsTableProps> = ({
       lossIcon: (
         <div className="w-1.5 h-1.5 rounded-full bg-gray-200 mt-0.5"></div>
       ),
+      drawIcon: (
+        <div className="w-1.5 h-1.5 rounded-full bg-gray-300 mt-0.5"></div>
+      ),
       ptsClass: "text-clean-blue text-base",
     },
     sporty: {
@@ -58,6 +62,7 @@ const StandingsTable: React.FC<StandingsTableProps> = ({
       row: "border-b border-gray-800 text-gray-200 hover:bg-white/5",
       winIcon: <span className="text-sporty-orange text-[10px]">W</span>,
       lossIcon: <span className="text-gray-600 text-[10px]">L</span>,
+      drawIcon: <span className="text-gray-500 text-[10px]">D</span>,
       ptsClass: "text-white text-lg",
     },
   };
@@ -73,9 +78,10 @@ const StandingsTable: React.FC<StandingsTableProps> = ({
           <div
             className={`grid grid-cols-12 gap-2 px-4 py-3 text-xs font-bold uppercase sticky top-0 z-10 ${s.header}`}
           >
-            <div className="col-span-5">Team</div>
-            <div className="col-span-2 text-center">P</div>
+            <div className="col-span-4">Team</div>
+            <div className="col-span-1 text-center">P</div>
             <div className="col-span-2 text-center">W</div>
+            <div className="col-span-2 text-center">D</div>
             <div className="col-span-2 text-center">L</div>
             <div className="col-span-1 text-center">Pts</div>
           </div>
@@ -91,14 +97,14 @@ const StandingsTable: React.FC<StandingsTableProps> = ({
                   key={stat.teamId}
                   className={`grid grid-cols-12 gap-2 px-4 py-4 items-center transition-colors text-sm ${s.row}`}
                 >
-                  <div className="col-span-5 truncate flex items-center gap-2">
+                  <div className="col-span-4 truncate flex items-center gap-2">
                     {variant === "sporty" && countryCode && (
                       <Flag countryCode={countryCode} />
                     )}
                     <span className="truncate">{teamName}</span>
                   </div>
 
-                  <div className="col-span-2 text-center text-gray-400 text-xs font-normal">
+                  <div className="col-span-1 text-center text-gray-400 text-xs font-normal">
                     {stat.played}
                   </div>
 
@@ -111,6 +117,17 @@ const StandingsTable: React.FC<StandingsTableProps> = ({
                       {stat.wins}
                     </span>
                     {stat.wins > 0 && s.winIcon}
+                  </div>
+
+                  <div className="col-span-2 flex items-center justify-center gap-1">
+                    <span
+                      className={`text-xs ${
+                        variant === "clean" ? "font-normal" : ""
+                      }`}
+                    >
+                      {stat.draws}
+                    </span>
+                    {stat.draws > 0 && s.drawIcon}
                   </div>
 
                   <div className="col-span-2 flex items-center justify-center gap-1">
