@@ -1,4 +1,4 @@
-import { Check, X } from "lucide-react";
+import { Check, Minus, X } from "lucide-react";
 import { useMemo } from "react";
 import { useAppSelector } from "../store/store";
 import { LeagueType } from "../types";
