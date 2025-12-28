@@ -1,7 +1,7 @@
 import { Plus, X } from "lucide-react";
 import { useState } from "react";
 import { useAppDispatch, addTeam } from "../store/store";
-import { LeagueType } from "../types";
+import { LeagueType, ThemeVariant } from "../types";
 interface TeamFormProps {
   league: LeagueType;
   variant: ThemeVariant;
