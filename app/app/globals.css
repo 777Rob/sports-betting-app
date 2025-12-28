@@ -1,11 +1,13 @@
 @import "tailwindcss";
 
 @theme {
+  /* Fonts */
   --font-sans: "Inter", sans-serif;
   --font-sporty: "Montserrat", sans-serif;
   --font-header: "Bebas Neue", sans-serif;
   --font-mono: "Space Mono", monospace;
 
+  /* Colors */
   --color-clean-header: #37013d;
   --color-clean-bg: #f8fafb;
   --color-clean-blue: #2463eb;
@@ -19,4 +21,67 @@
   --color-table-green: #016733;
   --color-table-purple: #43075b;
   --color-table-bg: #f3f5f6;
+}
+
+@layer components {
+  /* --- Table Green Theme --- */
+  .btn-table-green {
+    @apply flex items-center justify-center rounded transition-all duration-150 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply bg-table-green text-white font-mono text-xs uppercase tracking-wider font-bold py-3 hover:bg-[#003822];
+  }
+  .input-table-green {
+    @apply w-full outline-none transition-all duration-150 focus:ring-1 focus:ring-current;
+    @apply px-4 py-3 rounded border border-gray-300 bg-white text-gray-900 font-mono text-sm shadow-sm focus:border-table-green focus:ring-table-green;
+  }
+  .card-table-green {
+    @apply bg-white p-6 rounded-lg shadow-2xl border-t-4 border-table-green;
+  }
+  .label-table {
+    @apply block mb-2 text-gray-500 font-mono uppercase tracking-wider text-[10px] font-bold;
+  }
+
+  /* --- Table Purple Theme --- */
+  .btn-table-purple {
+    @apply flex items-center justify-center rounded transition-all duration-150 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply bg-table-purple text-white font-mono text-xs uppercase tracking-wider font-bold py-3 hover:bg-[#2d053d];
+  }
+  .input-table-purple {
+    @apply w-full outline-none transition-all duration-150 focus:ring-1 focus:ring-current;
+    @apply px-4 py-3 rounded border border-gray-300 bg-white text-gray-900 font-mono text-sm shadow-sm focus:border-table-purple focus:ring-table-purple;
+  }
+  .card-table-purple {
+    @apply bg-white p-6 rounded-lg shadow-2xl border-t-4 border-table-purple;
+  }
+
+  /* --- Clean Theme --- */
+  .btn-clean {
+    @apply flex items-center justify-center rounded transition-all duration-150 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply bg-clean-blue text-white font-bold shadow-sm py-3 text-sm hover:bg-blue-600;
+  }
+  .input-clean {
+    @apply w-full outline-none transition-all duration-150 focus:ring-1 focus:ring-current;
+    @apply bg-clean-bg text-gray-800 text-sm px-4 py-3 rounded placeholder-gray-400 focus:ring-2 focus:ring-blue-100 border-none;
+  }
+  .card-clean {
+    @apply bg-white p-8 rounded-lg shadow-xl;
+  }
+  .label-clean {
+    @apply block mb-2 text-gray-900 font-bold text-[11px] uppercase tracking-wider;
+  }
+
+  /* --- Sporty Theme --- */
+  .btn-sporty {
+    @apply flex items-center justify-center rounded transition-all duration-150 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply bg-sporty-orange text-white font-header text-sm uppercase tracking-wider py-2 w-full hover:bg-orange-600;
+  }
+  .input-sporty {
+    @apply w-full outline-none transition-all duration-150 focus:ring-1 focus:ring-current;
+    @apply bg-sporty-bg border border-gray-700 text-white px-4 py-3 rounded focus:border-sporty-orange;
+  }
+  .card-sporty {
+    @apply bg-sporty-card border border-gray-700 text-white p-8 rounded-xl shadow-2xl;
+  }
+  .label-sporty {
+    @apply block mb-2 text-sporty-orange font-header text-sm;
+  }
 }

@@ -26,22 +26,10 @@ const LeagueCard: React.FC<LeagueCardProps> = ({ league, title, icon }) => {
         {/* Actions Row */}
         <div className="flex gap-4">
           <div className="flex-1">
-            <TeamForm
-              league={league}
-              buttonClass="bg-table-green text-white hover:bg-[#003822] font-mono text-xs uppercase tracking-wider font-bold"
-              containerClass="bg-white p-6 rounded-lg shadow-2xl border-t-4 border-table-green"
-              inputClass="border-gray-300 bg-white text-gray-900 focus:border-table-green focus:ring-table-green font-mono"
-              saveButtonClass="bg-table-green hover:bg-[#003822] text-white font-mono uppercase tracking-widest"
-            />
+            <TeamForm league={league} variant="table-green" />
           </div>
           <div className="flex-1">
-            <MatchForm
-              league={league}
-              buttonClass="bg-table-purple text-white hover:bg-[#2d053d] font-mono text-xs uppercase tracking-wider font-bold"
-              containerClass="bg-white p-6 rounded-lg shadow-2xl border-t-4 border-table-purple"
-              inputClass="border-gray-300 bg-white text-gray-900 focus:border-table-purple focus:ring-table-purple font-mono"
-              saveButtonClass="bg-table-purple hover:bg-[#2d053d] text-white font-mono uppercase tracking-widest"
-            />
+            <MatchForm league={league} variant="table-purple" />
           </div>
         </div>
 

@@ -1,4 +1,4 @@
-import { Trophy, Flame } from "lucide-react";
+import { Trophy, Flame, ActivityIcon } from "lucide-react";
 import { Activity } from "react";
 import { LeagueType } from "../types";
 import MatchForm from "./MatchForm";
@@ -27,24 +27,10 @@ const LeagueCard: React.FC<LeagueCardProps> = ({ league, title, icon }) => {
         {/* Col 1: Action Buttons */}
         <div className="flex justify-between items-center">
           <div className="w-[42%]">
-            <TeamForm
-              league={league}
-              buttonClass="bg-sporty-orange text-white hover:bg-orange-600 font-header text-sm uppercase tracking-wider py-2 w-full"
-              containerClass="bg-sporty-card border border-gray-700 text-white p-8 rounded-xl shadow-2xl"
-              labelClass="text-sporty-orange font-header"
-              inputClass="bg-sporty-bg border-gray-700 text-white focus:border-sporty-orange"
-              saveButtonClass="bg-sporty-orange hover:bg-orange-600 text-white font-header"
-            />
+            <TeamForm league={league} variant="sporty" />
           </div>
           <div className="w-[42%]">
-            <MatchForm
-              league={league}
-              buttonClass="bg-sporty-orange text-white hover:bg-orange-600 font-header text-sm uppercase tracking-wider py-2 w-full"
-              containerClass="bg-sporty-card border border-gray-700 text-white p-8 rounded-xl shadow-2xl"
-              labelClass="text-sporty-orange font-header"
-              inputClass="bg-sporty-bg border-gray-700 text-white focus:border-sporty-orange"
-              saveButtonClass="bg-sporty-orange hover:bg-orange-600 text-white font-header"
-            />
+            <MatchForm league={league} variant="sporty" />
           </div>
         </div>
 
@@ -75,7 +61,7 @@ const SportyEnergeticLayout = () => {
     icon: React.ReactNode;
   }> = [
     { id: "premier", title: "Premier League", icon: <Trophy /> },
-    { id: "eurobasket", title: "Eurobasket", icon: <Activity /> },
+    { id: "eurobasket", title: "Eurobasket", icon: <ActivityIcon /> },
     { id: "wimbledon", title: "Wimbledon", icon: <Flame /> },
   ];
 

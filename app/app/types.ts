@@ -1,4 +1,5 @@
 export type LeagueType = "premier" | "eurobasket" | "wimbledon";
+export type ThemeVariant = "table-green" | "table-purple" | "clean" | "sporty";
 
 export interface Team {
   id: string;

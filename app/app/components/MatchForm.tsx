@@ -1,26 +1,18 @@
 import { Plus, X } from "lucide-react";
 import { useState, useMemo } from "react";
 import { useAppDispatch, useAppSelector, addMatch } from "../store/store";
-import { LeagueType } from "../types";
+import { LeagueType, ThemeVariant } from "../types";
 
 interface MatchFormProps {
   league: LeagueType;
+  variant: ThemeVariant;
   mode?: "modal" | "inline";
-  buttonClass?: string;
-  containerClass?: string;
-  inputClass?: string;
-  saveButtonClass?: string;
-  labelClass?: string;
 }
 
 const MatchForm: React.FC<MatchFormProps> = ({
   league,
+  variant,
   mode = "modal",
-  buttonClass = "bg-[#582c83] text-white hover:bg-[#401a6b] font-mono text-xs uppercase tracking-wider font-bold",
-  containerClass = "bg-white p-6 rounded-lg shadow-2xl border-t-4 border-[#582c83]",
-  inputClass = "border-gray-300 bg-white text-gray-900 focus:border-[#582c83] focus:ring-[#582c83] font-mono",
-  saveButtonClass = "bg-[#582c83] hover:bg-[#401a6b] text-white font-mono uppercase tracking-widest",
-  labelClass = "text-gray-500 font-mono uppercase tracking-wider",
 }) => {
   const dispatch = useAppDispatch();
   const teams = useAppSelector((state) => state.app.teams);
@@ -38,6 +30,48 @@ const MatchForm: React.FC<MatchFormProps> = ({
     () => teams.filter((t) => t.league === league),
     [teams, league]
   );
+
+  const getVariantClasses = () => {
+    switch (variant) {
+      case "table-green":
+        return {
+          btn: "btn-table-green",
+          input: "input-table-green",
+          card: "card-table-green",
+          label: "label-table",
+        };
+      case "table-purple":
+        return {
+          btn: "btn-table-purple",
+          input: "input-table-purple",
+          card: "card-table-purple",
+          label: "label-table",
+        };
+      case "clean":
+        return {
+          btn: "btn-clean",
+          input: "input-clean",
+          card: "card-clean",
+          label: "label-clean",
+        };
+      case "sporty":
+        return {
+          btn: "btn-sporty",
+          input: "input-sporty",
+          card: "card-sporty",
+          label: "label-sporty",
+        };
+      default:
+        return {
+          btn: "btn-table-green",
+          input: "input-table-green",
+          card: "card-table-green",
+          label: "label-table",
+        };
+    }
+  };
+
+  const styles = getVariantClasses();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -91,63 +125,55 @@ const MatchForm: React.FC<MatchFormProps> = ({
         </div>
       )}
 
-      <div
-        className={
-          mode === "inline" ? "flex flex-col gap-2" : "grid grid-cols-2 gap-4"
-        }
-      >
-        <div
-          className={mode === "inline" ? "grid grid-cols-2 gap-2" : "space-y-1"}
-        >
-          <div className="space-y-1">
-            {mode === "modal" && (
-              <label className={`text-[10px] font-bold ${labelClass}`}>
-                Home
-              </label>
-            )}
-            <select
-              value={homeId}
-              onChange={(e) => setHomeId(e.target.value)}
-              className={`w-full px-3 py-2 rounded border text-sm outline-none focus:ring-1 shadow-sm appearance-none ${inputClass}`}
-              style={{ backgroundImage: "none" }}
-            >
-              <option value="" className="text-gray-500">
-                Home Team
+      {/* Team Selection Row */}
+      <div className="grid grid-cols-2 gap-4">
+        <div className="space-y-1">
+          {mode === "modal" && <label className={styles.label}>Home</label>}
+          <select
+            value={homeId}
+            onChange={(e) => setHomeId(e.target.value)}
+            className={`${styles.input}`}
+          >
+            <option value="" className="text-gray-500">
+              Select
+            </option>
+            {leagueTeams.map((t) => (
+              <option
+                key={t.id}
+                value={t.id}
+                className="bg-inherit text-inherit"
+              >
+                {t.name}
               </option>
-              {leagueTeams.map((t) => (
-                <option key={t.id} value={t.id} className="text-gray-900">
+            ))}
+          </select>
+        </div>
+        <div className="space-y-1">
+          {mode === "modal" && <label className={styles.label}>Away</label>}
+          <select
+            value={awayId}
+            onChange={(e) => setAwayId(e.target.value)}
+            className={`${styles.input}`}
+          >
+            <option value="" className="text-gray-500">
+              Select
+            </option>
+            {leagueTeams
+              .filter((t) => t.id !== homeId)
+              .map((t) => (
+                <option
+                  key={t.id}
+                  value={t.id}
+                  className="bg-inherit text-inherit"
+                >
                   {t.name}
                 </option>
               ))}
-            </select>
-          </div>
-          <div className="space-y-1">
-            {mode === "modal" && (
-              <label className={`text-[10px] font-bold ${labelClass}`}>
-                Away
-              </label>
-            )}
-            <select
-              value={awayId}
-              onChange={(e) => setAwayId(e.target.value)}
-              className={`w-full px-3 py-2 rounded border text-sm outline-none focus:ring-1 shadow-sm appearance-none ${inputClass}`}
-              style={{ backgroundImage: "none" }}
-            >
-              <option value="" className="text-gray-500">
-                Away Team
-              </option>
-              {leagueTeams
-                .filter((t) => t.id !== homeId)
-                .map((t) => (
-                  <option key={t.id} value={t.id} className="text-gray-900">
-                    {t.name}
-                  </option>
-                ))}
-            </select>
-          </div>
+          </select>
         </div>
       </div>
 
+      {/* Score Inputs Row */}
       <div
         className={
           mode === "inline"
@@ -159,10 +185,10 @@ const MatchForm: React.FC<MatchFormProps> = ({
           <input
             type="number"
             min="0"
-            placeholder="Home Score"
+            placeholder="0"
             value={homeScore}
             onChange={(e) => setHomeScore(e.target.value)}
-            className={`w-full text-center py-2 rounded border font-bold text-lg outline-none focus:ring-1 shadow-inner ${inputClass}`}
+            className={`${styles.input} text-center font-bold text-lg`}
           />
         </div>
         {mode === "modal" && (
@@ -172,10 +198,10 @@ const MatchForm: React.FC<MatchFormProps> = ({
           <input
             type="number"
             min="0"
-            placeholder="Away Score"
+            placeholder="0"
             value={awayScore}
             onChange={(e) => setAwayScore(e.target.value)}
-            className={`w-full text-center py-2 rounded border font-bold text-lg outline-none focus:ring-1 shadow-inner ${inputClass}`}
+            className={`${styles.input} text-center font-bold text-lg`}
           />
         </div>
       </div>
@@ -184,7 +210,7 @@ const MatchForm: React.FC<MatchFormProps> = ({
         <button
           type="submit"
           disabled={!homeId || !awayId || homeScore === ""}
-          className={`w-full py-3 rounded text-sm font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${saveButtonClass}`}
+          className={`${styles.btn} w-full`}
         >
           Add Score
         </button>
@@ -194,8 +220,8 @@ const MatchForm: React.FC<MatchFormProps> = ({
 
   if (mode === "inline") {
     return (
-      <div className={containerClass}>
-        <h3 className={`text-sm font-bold mb-3 ${labelClass}`}>Add Score</h3>
+      <div className={variant === "clean" ? "" : styles.card}>
+        {variant === "clean" && <h3 className={styles.label}>Add Score</h3>}
         {formContent}
       </div>
     );
@@ -205,15 +231,15 @@ const MatchForm: React.FC<MatchFormProps> = ({
     <>
       <button
         onClick={() => setIsExpanded(true)}
-        className={`flex items-center justify-center gap-2 px-4 py-3 rounded-md shadow-sm transition-all duration-200 w-full ${buttonClass}`}
+        className={`${styles.btn} w-full`}
       >
-        <Plus size={16} />
+        <Plus size={16} className="mr-2" />
         Add Score
       </button>
 
       {isExpanded && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-          <div className={`w-full max-w-md relative ${containerClass}`}>
+          <div className={`w-full max-w-md relative ${styles.card}`}>
             <button
               onClick={() => setIsExpanded(false)}
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-800 transition-colors"
@@ -222,10 +248,11 @@ const MatchForm: React.FC<MatchFormProps> = ({
             </button>
 
             <h3
-              className={`text-lg mb-6 font-bold ${labelClass.replace(
-                "text-[10px]",
-                ""
-              )}`}
+              className={`text-lg mb-6 font-bold ${
+                variant.startsWith("table")
+                  ? "text-gray-500 font-mono uppercase tracking-wider"
+                  : styles.label
+              }`}
             >
               Record Score
             </h3>

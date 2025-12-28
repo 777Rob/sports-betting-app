@@ -1,10 +1,6 @@
+"use client";
 import React from "react";
 import "./globals.css";
-
-export const metadata = {
-  title: "Sports Standings App",
-  description: "A multi-theme sports tournament manager",
-};
 
 export default function RootLayout({
   children,

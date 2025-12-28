@@ -21,26 +21,12 @@ const LeagueCard: React.FC<LeagueCardProps> = ({ league, title, subtitle }) => {
       <div className="p-6 flex-1 flex flex-col gap-8 bg-white">
         {/* Section 1: Add Team */}
         <div>
-          <TeamForm
-            league={league}
-            mode="inline"
-            containerClass="bg-white p-0 rounded-none border-none"
-            inputClass="bg-clean-bg border-none text-gray-800 placeholder-gray-400 text-sm py-3 px-4 rounded"
-            saveButtonClass="bg-clean-blue hover:bg-blue-600 text-white font-bold rounded shadow-sm"
-            labelClass="text-gray-900 font-bold text-[11px] uppercase tracking-wider mb-2 block"
-          />
+          <TeamForm league={league} variant="clean" mode="inline" />
         </div>
 
         {/* Section 2: Add Score */}
         <div>
-          <MatchForm
-            league={league}
-            mode="inline"
-            containerClass="bg-white p-0 rounded-none border-none"
-            inputClass="bg-clean-bg border-none text-gray-800 placeholder-gray-400 text-sm py-3 px-4 rounded"
-            saveButtonClass="bg-clean-blue hover:bg-blue-600 text-white font-bold rounded shadow-sm py-3"
-            labelClass="text-gray-900 font-bold text-[11px] uppercase tracking-wider mb-2 block"
-          />
+          <MatchForm league={league} variant="clean" mode="inline" />
         </div>
 
         {/* Section 3: Table */}
