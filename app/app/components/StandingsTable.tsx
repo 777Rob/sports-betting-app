@@ -67,79 +67,82 @@ const StandingsTable: React.FC<StandingsTableProps> = ({
   return (
     <div className="w-full flex flex-col h-full">
       <div className={`flex flex-col h-full ${s.container}`}>
-        {/* Table Header */}
-        <div
-          className={`grid grid-cols-12 gap-2 px-4 py-3 text-xs font-bold uppercase z-10 relative ${s.header}`}
-        >
-          <div className="col-span-5">Team</div>
-          <div className="col-span-2 text-center">P</div>
-          <div className="col-span-2 text-center">W</div>
-          <div className="col-span-2 text-center">L</div>
-          <div className="col-span-1 text-center">Pts</div>
-        </div>
+        {/* Table Body & Header Combined for alignment */}
+        <div className="overflow-y-auto flex-1 max-h-[300px] relative scrollbar-thin">
+          {/* Sticky Header */}
+          <div
+            className={`grid grid-cols-12 gap-2 px-4 py-3 text-xs font-bold uppercase sticky top-0 z-10 ${s.header}`}
+          >
+            <div className="col-span-5">Team</div>
+            <div className="col-span-2 text-center">P</div>
+            <div className="col-span-2 text-center">W</div>
+            <div className="col-span-2 text-center">L</div>
+            <div className="col-span-1 text-center">Pts</div>
+          </div>
 
-        {/* Table Body */}
-        <div className="overflow-y-auto flex-1 max-h-[300px]">
-          {standings.map((stat) => {
-            const teamName = getTeamName(teams, stat.teamId);
-            const countryCode = getCountryCode(teamName);
+          {/* Scrollable Rows */}
+          <div className="flex flex-col">
+            {standings.map((stat) => {
+              const teamName = getTeamName(teams, stat.teamId);
+              const countryCode = getCountryCode(teamName);
 
-            return (
-              <div
-                key={stat.teamId}
-                className={`grid grid-cols-12 gap-2 px-4 py-4 items-center transition-colors text-sm ${s.row}`}
-              >
-                <div className="col-span-5 truncate flex items-center gap-2">
-                  {variant === "sporty" && countryCode && (
-                    <Flag countryCode={countryCode} />
-                  )}
-                  <span className="truncate">{teamName}</span>
-                </div>
-
-                <div className="col-span-2 text-center text-gray-400 text-xs font-normal">
-                  {stat.played}
-                </div>
-
-                <div className="col-span-2 flex items-center justify-center gap-1">
-                  <span
-                    className={`text-xs ${
-                      variant === "clean" ? "font-normal" : ""
-                    }`}
-                  >
-                    {stat.wins}
-                  </span>
-                  {stat.wins > 0 && s.winIcon}
-                </div>
-
-                <div className="col-span-2 flex items-center justify-center gap-1">
-                  <span
-                    className={`text-xs ${
-                      variant === "clean" ? "font-normal" : ""
-                    }`}
-                  >
-                    {stat.losses}
-                  </span>
-                  {stat.losses > 0 && s.lossIcon}
-                </div>
-
+              return (
                 <div
-                  className={`col-span-1 text-center font-black ${s.ptsClass}`}
+                  key={stat.teamId}
+                  className={`grid grid-cols-12 gap-2 px-4 py-4 items-center transition-colors text-sm ${s.row}`}
                 >
-                  {stat.points}
-                </div>
-              </div>
-            );
-          })}
+                  <div className="col-span-5 truncate flex items-center gap-2">
+                    {variant === "sporty" && countryCode && (
+                      <Flag countryCode={countryCode} />
+                    )}
+                    <span className="truncate">{teamName}</span>
+                  </div>
 
-          {standings.length === 0 && (
-            <div
-              className={`p-8 text-center italic text-xs ${
-                variant === "sporty" ? "text-gray-600" : "text-gray-400"
-              }`}
-            >
-              No data
-            </div>
-          )}
+                  <div className="col-span-2 text-center text-gray-400 text-xs font-normal">
+                    {stat.played}
+                  </div>
+
+                  <div className="col-span-2 flex items-center justify-center gap-1">
+                    <span
+                      className={`text-xs ${
+                        variant === "clean" ? "font-normal" : ""
+                      }`}
+                    >
+                      {stat.wins}
+                    </span>
+                    {stat.wins > 0 && s.winIcon}
+                  </div>
+
+                  <div className="col-span-2 flex items-center justify-center gap-1">
+                    <span
+                      className={`text-xs ${
+                        variant === "clean" ? "font-normal" : ""
+                      }`}
+                    >
+                      {stat.losses}
+                    </span>
+                    {stat.losses > 0 && s.lossIcon}
+                  </div>
+
+                  <div
+                    className={`col-span-1 text-center font-black ${s.ptsClass}`}
+                  >
+                    {stat.points}
+                  </div>
+                </div>
+              );
+            })}
+
+            {standings.length === 0 && (
+              <div
+                className={`p-8 text-center italic text-xs ${
+                  variant === "sporty" ? "text-gray-600" : "text-gray-400"
+                }`}
+              >
+                No data
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
