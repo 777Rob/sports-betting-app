@@ -86,7 +86,7 @@ const MatchForm: React.FC<MatchFormProps> = ({
           <select
             value={homeId}
             onChange={(e) => setHomeId(e.target.value)}
-            className={`inpuit-${variant}`}
+            className={`input-${variant}`}
           >
             <option value="" className="text-gray-500">
               Select
@@ -109,7 +109,7 @@ const MatchForm: React.FC<MatchFormProps> = ({
           <select
             value={awayId}
             onChange={(e) => setAwayId(e.target.value)}
-            className={`inpuit-${variant}`}
+            className={`input-${variant}`}
           >
             <option value="" className="text-gray-500">
               Select

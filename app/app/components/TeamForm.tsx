@@ -124,7 +124,9 @@ const TeamForm: React.FC<TeamFormProps> = ({
           setError(null);
           setName("");
         }}
-        className={`btn-${variant} w-full`}
+        className={`btn-${
+          variant === "table-centric" ? "table-centric-green" : variant
+        } w-full`}
       >
         <Plus size={16} className="mr-2" />
         Add {league === "wimbledon" ? "Player" : "Team"}

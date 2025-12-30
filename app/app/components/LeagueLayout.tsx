@@ -134,19 +134,8 @@ const LeagueLayout: React.FC<{ theme: Theme }> = ({ theme }) => {
     },
   ];
 
-  const getGridClass = () => {
-    switch (theme) {
-      case "clean-minimal":
-        return "grid grid-cols-1 lg:grid-cols-3 gap-8 items-start w-full animate-in fade-in duration-500 font-sans";
-      case "sporty-energetic":
-        return "grid grid-cols-1 lg:grid-cols-3 gap-6 items-start w-full animate-in zoom-in-95 duration-500 font-sporty";
-      default:
-        return "grid grid-cols-1 lg:grid-cols-3 gap-6 items-start w-full animate-in fade-in duration-500 font-mono";
-    }
-  };
-
   return (
-    <div className={getGridClass()}>
+    <div className={`grid-${theme}`}>
       {leagues.map((lg) => (
         <LeagueCard
           key={lg.id}

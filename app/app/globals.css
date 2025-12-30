@@ -59,7 +59,7 @@
 
 @layer components {
   /* --- Table Green Theme --- */
-  .btn-table-green {
+  .btn-table-centric-green {
     @apply flex items-center justify-center rounded transition-all duration-150 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
     @apply bg-table-green text-white font-mono text-xs uppercase tracking-wider font-bold py-3 hover:bg-[#003822];
   }
@@ -73,14 +73,12 @@
   .label-table-tablecentric {
     @apply block mb-2 text-gray-500 font-mono uppercase tracking-wider text-[10px] font-bold;
   }
-  .btn-table-centric {
-    @apply flex items-center justify-center rounded transition-all duration-150 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
-    @apply bg-table-green text-white font-mono text-xs uppercase tracking-wider font-bold py-3 hover:bg-[#003822];
-  }
+
   .input-table-centric {
     @apply w-full outline-none transition-all duration-150 focus:ring-1 focus:ring-current;
     @apply px-4 py-3 rounded border border-gray-300 bg-white text-gray-900 font-mono text-sm shadow-sm focus:border-table-green focus:ring-table-green;
   }
+
   .card-table-centric {
     @apply bg-white p-6 rounded-lg shadow-2xl border-t-4 border-table-green;
   }
@@ -203,5 +201,26 @@
   }
   .standings-pts-sporty-energetic {
     @apply text-white text-lg;
+  }
+
+  /*   const getGridClass = () => {
+    switch (theme) {
+      case "clean-minimal":
+        return "grid grid-cols-1 lg:grid-cols-3 gap-8 items-start w-full animate-in fade-in duration-500 font-sans";
+      case "sporty-energetic":
+        return "grid grid-cols-1 lg:grid-cols-3 gap-6 items-start w-full animate-in zoom-in-95 duration-500 font-sporty";
+      default:
+        return "grid grid-cols-1 lg:grid-cols-3 gap-6 items-start w-full animate-in fade-in duration-500 font-mono";
+    }
+  };
+ */
+  .grid-clean-minimal {
+    @apply grid grid-cols-1 lg:grid-cols-3 gap-8 items-start w-full font-sans;
+  }
+  .grid-sporty-energetic {
+    @apply grid grid-cols-1 lg:grid-cols-3 gap-6 items-start w-full font-sporty;
+  }
+  .grid-table-centric {
+    @apply grid grid-cols-1 lg:grid-cols-3 gap-6 items-start w-full font-mono;
   }
 }
