@@ -1,7 +1,7 @@
 import Flag from "./Flag";
 import { useAppSelector } from "../store/store";
 import { LeagueType } from "../types";
-import { getTeamName, getCountryCode } from "../utils/utils";
+import { getTeamName, getCountryCode, getLastMatches } from "../utils/utils";
 
 interface MatchListProps {
   league: LeagueType;
@@ -10,11 +10,7 @@ interface MatchListProps {
 const MatchList: React.FC<MatchListProps> = ({ league }) => {
   const { teams, matches } = useAppSelector((state) => state.app);
 
-  // Get last 5 matches for this league, sorted by date (newest first if date existed, here just reverse order)
-  const leagueMatches = matches
-    .filter((m) => m.league === league)
-    .slice(-4)
-    .reverse();
+  const leagueMatches = getLastMatches(matches, 5, league);
 
   return (
     <div className="space-y-3 font-sporty">

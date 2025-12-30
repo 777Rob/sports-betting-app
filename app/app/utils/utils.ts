@@ -83,6 +83,18 @@ export const getTeamName = (teams: Team[], id: string): string => {
   return teams.find((t) => t.id === id)?.name || "Unknown";
 };
 
+// Get last 5 matches for this league, sorted by date (newest first if date existed, here just reverse order)
+export const getLastMatches = (
+  matches: Match[],
+  numMatches: number,
+  league: LeagueType
+) => {
+  return matches
+    .filter((m) => m.league === league)
+    .slice(-numMatches)
+    .reverse();
+};
+
 export const getCountryCode = (name: string): string | undefined => {
   const mapping: Record<string, string> = {
     // --- COUNTRIES ---
