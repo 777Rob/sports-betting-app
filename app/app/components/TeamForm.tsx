@@ -8,43 +8,28 @@ interface TeamFormProps {
   mode?: "modal" | "inline";
 }
 
-const TeamForm: React.FC<TeamFormProps> = ({
-  league,
+interface FormContentProps {
+  handleSubmit: (e: React.FormEvent) => void;
+  mode: "modal" | "inline";
+  variant: Theme;
+  name: string;
+  setName: React.Dispatch<React.SetStateAction<string>>;
+  error: string | null;
+  setError: React.Dispatch<React.SetStateAction<string | null>>;
+  league: LeagueType;
+}
+
+const AddTeamForm: React.FC<FormContentProps> = ({
+  handleSubmit,
+  mode,
   variant,
-  mode = "modal",
+  name,
+  setName,
+  error,
+  setError,
+  league,
 }) => {
-  const [name, setName] = useState("");
-  const [error, setError] = useState<string | null>(null);
-  const [isExpanded, setIsExpanded] = useState(false);
-  const dispatch = useAppDispatch();
-  const { teams } = useAppSelector((state) => state.app);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-
-    if (name.trim()) {
-      const trimmedName = name.trim();
-
-      // Check for duplicates in the current league (case-insensitive)
-      const exists = teams.some(
-        (t) =>
-          t.league === league &&
-          t.name.toLowerCase() === trimmedName.toLowerCase()
-      );
-
-      if (exists) {
-        setError("Name already exists.");
-        return;
-      }
-
-      dispatch(addTeam({ name: trimmedName, league }));
-      setName("");
-      if (mode === "modal") setIsExpanded(false);
-    }
-  };
-
-  const formContent = (
+  return (
     <form
       onSubmit={handleSubmit}
       className={
@@ -98,6 +83,43 @@ const TeamForm: React.FC<TeamFormProps> = ({
       </div>
     </form>
   );
+};
+
+const TeamForm: React.FC<TeamFormProps> = ({
+  league,
+  variant,
+  mode = "modal",
+}) => {
+  const [name, setName] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const dispatch = useAppDispatch();
+  const { teams } = useAppSelector((state) => state.app);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+
+    if (name.trim()) {
+      const trimmedName = name.trim();
+
+      // Check for duplicates in the current league (case-insensitive)
+      const exists = teams.some(
+        (t) =>
+          t.league === league &&
+          t.name.toLowerCase() === trimmedName.toLowerCase()
+      );
+
+      if (exists) {
+        setError("Name already exists.");
+        return;
+      }
+
+      dispatch(addTeam({ name: trimmedName, league }));
+      setName("");
+      if (mode === "modal") setIsExpanded(false);
+    }
+  };
 
   if (mode === "inline") {
     return (
@@ -111,7 +133,16 @@ const TeamForm: React.FC<TeamFormProps> = ({
             Add Team
           </h3>
         )}
-        {formContent}
+        <AddTeamForm
+          handleSubmit={handleSubmit}
+          mode={mode}
+          variant={variant}
+          name={name}
+          setName={setName}
+          error={error}
+          setError={setError}
+          league={league}
+        />
       </div>
     );
   }
@@ -152,7 +183,16 @@ const TeamForm: React.FC<TeamFormProps> = ({
               Add Participant
             </h3>
 
-            {formContent}
+            <AddTeamForm
+              handleSubmit={handleSubmit}
+              mode={mode}
+              variant={variant}
+              name={name}
+              setName={setName}
+              error={error}
+              setError={setError}
+              league={league}
+            />
           </div>
         </div>
       )}
