@@ -69,14 +69,12 @@ const defaultMatches: Match[] = [
   },
 ];
 
-// Initial state must be deterministic (same on server and client) to prevent hydration errors
 const initialState: AppState = {
   teams: defaultTeams,
   matches: defaultMatches,
   currentLeague: "premier",
 };
 
-// Redux Slice
 export const appSlice = createSlice({
   name: "app",
   initialState,
@@ -117,8 +115,6 @@ export const appSlice = createSlice({
       state.currentLeague = "premier";
     },
     resetToDemo: (state) => {
-      // Use JSON parse/stringify for a simple deep copy to ensure we break references
-      // This prevents any potential mutation issues with the default arrays
       state.teams = JSON.parse(JSON.stringify(defaultTeams));
       state.matches = JSON.parse(JSON.stringify(defaultMatches));
       state.currentLeague = "premier";
@@ -141,7 +137,6 @@ export const {
   hydrateState,
 } = appSlice.actions;
 
-// Configure Store
 export const store = configureStore({
   reducer: {
     app: appSlice.reducer,
@@ -161,7 +156,6 @@ store.subscribe(() => {
   }
 });
 
-// Types and Hooks
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
