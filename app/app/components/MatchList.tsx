@@ -8,8 +8,7 @@ interface MatchListProps {
 }
 
 const MatchList: React.FC<MatchListProps> = ({ league }) => {
-  const teams = useAppSelector((state) => state.app.teams);
-  const matches = useAppSelector((state) => state.app.matches);
+  const { teams, matches } = useAppSelector((state) => state.app);
 
   // Get last 5 matches for this league, sorted by date (newest first if date existed, here just reverse order)
   const leagueMatches = matches

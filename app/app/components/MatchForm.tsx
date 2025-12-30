@@ -15,8 +15,7 @@ const MatchForm: React.FC<MatchFormProps> = ({
   mode = "modal",
 }) => {
   const dispatch = useAppDispatch();
-  const teams = useAppSelector((state) => state.app.teams);
-  const matches = useAppSelector((state) => state.app.matches);
+  const { teams, matches } = useAppSelector((state) => state.app);
 
   const [isExpanded, setIsExpanded] = useState(false);
 

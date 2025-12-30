@@ -18,8 +18,7 @@ const StandingsTable: React.FC<StandingsTableProps> = ({
   league,
   variant = "table-centric",
 }) => {
-  const teams = useAppSelector((state) => state.app.teams);
-  const matches = useAppSelector((state) => state.app.matches);
+  const { teams, matches } = useAppSelector((state) => state.app);
 
   const standings = useMemo(() => {
     const leagueTeams = teams.filter((t) => t.league === league);
