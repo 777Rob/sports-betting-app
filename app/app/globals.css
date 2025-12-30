@@ -9,12 +9,13 @@
 
   /* Colors */
   --color-clean-header: #37013d;
-  --color-clean-bg: #f8fafb;
+  --color-clean-minimal-bg: #f8fafb;
   --color-clean-blue: #2463eb;
   --color-clean-gray: #efeeef;
   --color-clean-border: #efeeef;
 
   --color-sporty-bg: #002f26;
+  --color-sporty-energetic-bg: #002f26;
   --color-sporty-card: #01201c;
   --color-sporty-orange: #ff6901;
 
@@ -22,40 +23,6 @@
   --color-table-purple: #43075b;
   --color-table-bg: #f3f5f6;
 }
-
-/* const getVariantClasses = () => {
-    switch (variant) {
-      case "table-centric":
-        return {
-          btn: "btn-table-purple",
-          input: "input-table-purple",
-          card: "card-table-purple",
-          label: "label-table",
-        };
-      case "clean-minimal":
-        return {
-          btn: "btn-clean-minimal",
-          input: "input-clean-minimal",
-          card: "card-clean-minimal",
-          label: "label-clean-minimal",
-        };
-      case "sporty-energetic":
-        return {
-          btn: "btn-sporty-energetic",
-          input: "input-sporty-energetic",
-          card: "card-sporty-energetic",
-          label: "label-sporty-energetic",
-        };
-      default:
-        return {
-          btn: "btn-table-green",
-          input: "input-table-green",
-          card: "card-table-green",
-          label: "label-table",
-        };
-    }
-  };
- */
 
 @layer components {
   /* --- Table Green Theme --- */
@@ -106,7 +73,7 @@
   }
   .input-clean-minimal {
     @apply w-full outline-none transition-all duration-150 focus:ring-1 focus:ring-current;
-    @apply bg-clean-bg text-gray-800 text-sm px-4 py-3 rounded placeholder-gray-400 focus:ring-2 focus:ring-blue-100 border-none;
+    @apply bg-clean-minimal-bg text-gray-800 text-sm px-4 py-3 rounded placeholder-gray-400 focus:ring-2 focus:ring-blue-100 border-none;
   }
   .card-clean-minimal {
     @apply bg-white p-8 rounded-lg shadow-xl;
@@ -184,7 +151,7 @@
     @apply bg-white border-b border-clean-border text-gray-400 font-sans text-[10px] tracking-wider font-bold;
   }
   .standings-row-clean-minimal {
-    @apply border-b border-clean-border text-gray-700 font-bold font-sans hover:bg-clean-bg;
+    @apply border-b border-clean-border text-gray-700 font-bold font-sans hover:bg-clean-minimal-bg;
   }
   .standings-pts-clean-minimal {
     @apply text-clean-blue text-base;

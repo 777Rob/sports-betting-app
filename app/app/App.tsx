@@ -28,19 +28,6 @@ function App() {
     }
   }, [dispatch]);
 
-  const getBackgroundClass = () => {
-    switch (currentTheme) {
-      case "table-centric":
-        return "bg-table-bg";
-      case "clean-minimal":
-        return "bg-clean-bg";
-      case "sporty-energetic":
-        return "bg-sporty-bg";
-      default:
-        return "bg-gray-50";
-    }
-  };
-
   const handleClearData = () => {
     if (confirmClear) {
       dispatch(resetData());
@@ -59,7 +46,7 @@ function App() {
 
   return (
     <div
-      className={`min-h-screen w-full p-4 md:p-12 transition-colors duration-500 relative flex flex-col ${getBackgroundClass()}`}
+      className={`min-h-screen w-full p-4 md:p-12 transition-colors duration-500 relative flex flex-col bg-${currentTheme}-bg `}
     >
       {/* Theme Switcher */}
       <div className="max-w-[1400px] mx-auto mb-6 md:mb-10 flex justify-center pointer-events-none relative z-50 w-full">

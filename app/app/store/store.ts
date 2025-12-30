@@ -9,7 +9,6 @@ interface AppState {
   currentLeague: LeagueType;
 }
 
-// Initial Data
 const defaultTeams: Team[] = [
   // Premier League
   { id: "t1", name: "Man U", league: "premier" },

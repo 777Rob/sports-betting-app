@@ -1,6 +1,10 @@
 import Image from "next/image";
 
-const Flag = ({ countryCode }: { countryCode: string }) => {
+interface FlagProps {
+  countryCode: string;
+}
+
+const Flag: React.FC<FlagProps> = ({ countryCode }) => {
   return (
     <Image
       src={`https://flagcdn.com/${countryCode.toLowerCase()}.svg`}
