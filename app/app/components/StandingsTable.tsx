@@ -26,7 +26,6 @@ const StandingsTable: React.FC<StandingsTableProps> = ({
     return calculateStandings(leagueTeams, leagueMatches);
   }, [teams, matches, league]);
 
-  // Style Config
   const styles = {
     "table-centric": {
       container:
@@ -54,6 +53,7 @@ const StandingsTable: React.FC<StandingsTableProps> = ({
       ),
       ptsClass: "text-clean-blue text-base",
     },
+
     sporty: {
       container: "bg-sporty-bg/30 rounded-lg overflow-hidden font-sporty",
       header:

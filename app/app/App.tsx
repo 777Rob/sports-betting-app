@@ -1,8 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import CleanMinimalLayout from "./components/CleanMinimalLayout";
-import SportyEnergeticLayout from "./components/SportyEnergeticLayout";
-import TableCentricLayout from "./components/TableCentricLayout";
 import {
   useAppDispatch,
   hydrateState,
@@ -10,7 +7,8 @@ import {
   resetToDemo,
 } from "./store/store";
 import { AlertTriangle, RotateCcw, Trash2 } from "lucide-react";
-type Theme = "table-centric" | "clean-minimal" | "sporty-energetic";
+import LeagueLayout from "./components/LeagueLayout";
+import { Theme } from "./types";
 
 function App() {
   const [currentTheme, setCurrentTheme] = useState<Theme>("table-centric");
@@ -29,19 +27,6 @@ function App() {
       console.error("Failed to load state", e);
     }
   }, [dispatch]);
-
-  const renderLayout = () => {
-    switch (currentTheme) {
-      case "table-centric":
-        return <TableCentricLayout />;
-      case "clean-minimal":
-        return <CleanMinimalLayout />;
-      case "sporty-energetic":
-        return <SportyEnergeticLayout />;
-      default:
-        return <TableCentricLayout />;
-    }
-  };
 
   const getBackgroundClass = () => {
     switch (currentTheme) {
@@ -114,7 +99,7 @@ function App() {
 
       {/* Layout Content */}
       <div className="max-w-[1400px] mx-auto w-full flex-1">
-        {renderLayout()}
+        <LeagueLayout theme={currentTheme} />
       </div>
 
       {/* Footer Data Controls - Moved to bottom for better mobile UX */}
