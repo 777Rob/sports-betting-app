@@ -30,40 +30,6 @@ const LeagueCard: React.FC<LeagueCardProps> = ({
   theme,
   icon,
 }) => {
-  // Styles based on theme
-  const getContainerClass = () => {
-    switch (theme) {
-      case "table-centric":
-        return "bg-white rounded-lg shadow-sm border border-gray-200";
-      case "clean-minimal":
-        return "bg-white rounded-lg shadow-xl border border-clean-border";
-      case "sporty-energetic":
-        return "bg-sporty-card rounded-lg shadow-2xl border border-gray-800";
-    }
-  };
-
-  const getHeaderClass = () => {
-    switch (theme) {
-      case "table-centric":
-        return "px-6 py-5 flex items-center gap-3 bg-table-green text-white";
-      case "clean-minimal":
-        return "px-6 py-4 bg-clean-header border-b border-clean-border";
-      case "sporty-energetic":
-        return "px-6 py-5 flex items-center gap-3 border-b border-gray-800";
-    }
-  };
-
-  const getTitleClass = () => {
-    switch (theme) {
-      case "table-centric":
-        return "text-xl font-bold tracking-wider font-mono";
-      case "clean-minimal":
-        return "text-xl font-bold text-white tracking-tight";
-      case "sporty-energetic":
-        return "text-2xl font-header tracking-wider text-white uppercase";
-    }
-  };
-
   const renderContent = () => {
     if (theme === "table-centric") {
       return (
@@ -131,15 +97,15 @@ const LeagueCard: React.FC<LeagueCardProps> = ({
 
   return (
     <div
-      className={`overflow-hidden flex flex-col w-full h-full ${getContainerClass()}`}
+      className={`overflow-hidden flex flex-col w-full h-full teamform-container-${theme}`}
     >
-      <div className={getHeaderClass()}>
+      <div className={`teamform-header-${theme}`}>
         {icon && theme !== "clean-minimal" && (
           <div className={theme === "sporty-energetic" ? "text-white" : ""}>
             {icon}
           </div>
         )}
-        <h2 className={getTitleClass()}>{title}</h2>
+        <h2 className={`teamform-title-${theme}`}>{title}</h2>
       </div>
       {renderContent()}
     </div>

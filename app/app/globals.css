@@ -98,4 +98,36 @@
   .label-sporty-energetic {
     @apply block mb-2 text-sporty-orange font-header text-sm;
   }
+
+  .teamform-header-table-centric {
+    @apply px-6 py-5 flex items-center gap-3 bg-table-green text-white;
+  }
+
+  .teamform-header-clean-minimal {
+    @apply px-6 py-4 bg-clean-header border-b border-clean-border;
+  }
+
+  .teamform-header-sporty-energetic {
+    @apply px-6 py-5 flex items-center gap-3 border-b border-gray-800;
+  }
+
+  .teamform-container-table-centric {
+    @apply bg-white rounded-lg shadow-sm border border-gray-200;
+  }
+  .teamform-container-clean-minimal {
+    @apply bg-white rounded-lg shadow-xl border border-clean-border;
+  }
+  .teamform-container-sporty-energetic {
+    @apply bg-sporty-card rounded-lg shadow-2xl border border-gray-800;
+  }
+
+  .teamform-title-table-centric {
+    @apply text-xl font-bold tracking-wider font-mono;
+  }
+  .teamform-title-clean-minimal {
+    @apply text-xl font-bold text-white tracking-tight;
+  }
+  .teamform-title-sporty-energetic {
+    @apply text-2xl font-header tracking-wider text-white uppercase;
+  }
 }
