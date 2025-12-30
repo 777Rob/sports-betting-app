@@ -30,42 +30,6 @@ const MatchForm: React.FC<MatchFormProps> = ({
     () => teams.filter((t) => t.league === league),
     [teams, league]
   );
-
-  const getVariantClasses = () => {
-    switch (variant) {
-      case "table-centric":
-        return {
-          btn: "btn-table-purple",
-          input: "input-table-purple",
-          card: "card-table-purple",
-          label: "label-table",
-        };
-      case "clean-minimal":
-        return {
-          btn: "btn-clean-minimal",
-          input: "input-clean-minimal",
-          card: "card-clean-minimal",
-          label: "label-clean-minimal",
-        };
-      case "sporty-energetic":
-        return {
-          btn: "btn-sporty-energetic",
-          input: "input-sporty-energetic",
-          card: "card-sporty-energetic",
-          label: "label-sporty-energetic",
-        };
-      default:
-        return {
-          btn: "btn-table-green",
-          input: "input-table-green",
-          card: "card-table-green",
-          label: "label-table",
-        };
-    }
-  };
-
-  const styles = getVariantClasses();
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
@@ -116,11 +80,13 @@ const MatchForm: React.FC<MatchFormProps> = ({
       {/* Team Selection Row */}
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-1">
-          {mode === "modal" && <label className={styles.label}>Home</label>}
+          {mode === "modal" && (
+            <label className={`label-${variant}`}>Home</label>
+          )}
           <select
             value={homeId}
             onChange={(e) => setHomeId(e.target.value)}
-            className={`${styles.input}`}
+            className={`inpuit-${variant}`}
           >
             <option value="" className="text-gray-500">
               Select
@@ -137,11 +103,13 @@ const MatchForm: React.FC<MatchFormProps> = ({
           </select>
         </div>
         <div className="space-y-1">
-          {mode === "modal" && <label className={styles.label}>Away</label>}
+          {mode === "modal" && (
+            <label className={`label-${variant}`}>Away</label>
+          )}
           <select
             value={awayId}
             onChange={(e) => setAwayId(e.target.value)}
-            className={`${styles.input}`}
+            className={`inpuit-${variant}`}
           >
             <option value="" className="text-gray-500">
               Select
@@ -176,7 +144,7 @@ const MatchForm: React.FC<MatchFormProps> = ({
             placeholder="0"
             value={homeScore}
             onChange={(e) => setHomeScore(e.target.value)}
-            className={`${styles.input} text-center font-bold text-lg`}
+            className={`input-${variant} text-center font-bold text-lg`}
           />
         </div>
         {mode === "modal" && (
@@ -189,7 +157,7 @@ const MatchForm: React.FC<MatchFormProps> = ({
             placeholder="0"
             value={awayScore}
             onChange={(e) => setAwayScore(e.target.value)}
-            className={`${styles.input} text-center font-bold text-lg`}
+            className={`input-${variant} text-center font-bold text-lg`}
           />
         </div>
       </div>
@@ -198,7 +166,7 @@ const MatchForm: React.FC<MatchFormProps> = ({
         <button
           type="submit"
           disabled={!homeId || !awayId || homeScore === ""}
-          className={`${styles.btn} w-full`}
+          className={`btn-${variant} w-full`}
         >
           Add Score
         </button>
@@ -208,9 +176,9 @@ const MatchForm: React.FC<MatchFormProps> = ({
 
   if (mode === "inline") {
     return (
-      <div className={variant === "clean-minimal" ? "" : styles.card}>
+      <div className={variant === "clean-minimal" ? "" : `card-${variant}`}>
         {variant === "clean-minimal" && (
-          <h3 className={styles.label}>Add Score</h3>
+          <h3 className={`label-${variant}`}>Add Score</h3>
         )}
         {formContent}
       </div>
@@ -221,7 +189,7 @@ const MatchForm: React.FC<MatchFormProps> = ({
     <>
       <button
         onClick={() => setIsExpanded(true)}
-        className={`${styles.btn} w-full`}
+        className={`btn-${variant} w-full`}
       >
         <Plus size={16} className="mr-2" />
         Add Score
@@ -229,7 +197,7 @@ const MatchForm: React.FC<MatchFormProps> = ({
 
       {isExpanded && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-          <div className={`w-full max-w-md relative ${styles.card}`}>
+          <div className={`w-full max-w-md relative card-${variant}`}>
             <button
               onClick={() => setIsExpanded(false)}
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-800 transition-colors"
@@ -241,7 +209,7 @@ const MatchForm: React.FC<MatchFormProps> = ({
               className={`text-lg mb-6 font-bold ${
                 variant.startsWith("table")
                   ? "text-gray-500 font-mono uppercase tracking-wider"
-                  : styles.label
+                  : `label-${variant}`
               }`}
             >
               Record Score
