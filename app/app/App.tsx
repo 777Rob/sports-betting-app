@@ -46,7 +46,9 @@ function App() {
 
   return (
     <div
-      className={`min-h-screen w-full p-4 md:p-12 transition-colors duration-500 relative flex flex-col bg-${currentTheme}-bg `}
+      className={`min-h-screen w-full p-4 md:p-12 transition-colors duration-500 relative flex flex-col ${
+        currentTheme === "sporty-energetic" && "bg-sporty-bg"
+      }`}
     >
       {/* Theme Switcher */}
       <div className="max-w-[1400px] mx-auto mb-6 md:mb-10 flex justify-center pointer-events-none relative z-50 w-full">
