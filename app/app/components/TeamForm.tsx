@@ -19,7 +19,7 @@ interface FormContentProps {
   setIsExpanded: (expanded: boolean) => void;
 }
 
-const AddTeamForm: React.FC<FormContentProps> = ({
+const TeamFormContent: React.FC<FormContentProps> = ({
   mode,
   variant,
   name,
@@ -134,7 +134,7 @@ const TeamForm: React.FC<TeamFormProps> = ({
             Add Team
           </h3>
         )}
-        <AddTeamForm
+        <TeamFormContent
           mode={mode}
           variant={variant}
           name={name}
@@ -184,7 +184,7 @@ const TeamForm: React.FC<TeamFormProps> = ({
               Add Participant
             </h3>
 
-            <AddTeamForm
+            <TeamFormContent
               mode={mode}
               variant={variant}
               name={name}

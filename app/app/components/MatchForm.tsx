@@ -11,7 +11,7 @@ interface FormContentProps {
   setIsExpanded: (expanded: boolean) => void;
 }
 
-const FormContent: React.FC<FormContentProps> = ({
+const MatchFormContent: React.FC<FormContentProps> = ({
   mode,
   variant,
   league,
@@ -194,7 +194,7 @@ const MatchForm: React.FC<MatchFormProps> = ({
         {variant === "clean-minimal" && (
           <h3 className={`label-${variant}`}>Add Score</h3>
         )}
-        <FormContent
+        <MatchFormContent
           league={league}
           variant={variant}
           mode={mode}
@@ -232,7 +232,7 @@ const MatchForm: React.FC<MatchFormProps> = ({
             >
               Record Score
             </h3>
-            <FormContent
+            <MatchFormContent
               league={league}
               variant={variant}
               mode={mode}
