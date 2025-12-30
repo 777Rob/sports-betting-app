@@ -1,7 +1,7 @@
 import { Check, Minus, X } from "lucide-react";
 import { useMemo } from "react";
 import { useAppSelector } from "../store/store";
-import { LeagueType } from "../types";
+import { LeagueType, Theme } from "../types";
 import Flag from "./Flag";
 import {
   calculateStandings,
@@ -11,7 +11,7 @@ import {
 
 interface StandingsTableProps {
   league: LeagueType;
-  variant?: "table-centric" | "clean" | "sporty";
+  variant?: Theme;
 }
 
 const StandingsTable: React.FC<StandingsTableProps> = ({
@@ -37,7 +37,7 @@ const StandingsTable: React.FC<StandingsTableProps> = ({
       drawIcon: <Minus size={12} className="text-gray-400" strokeWidth={3} />,
       ptsClass: "text-gray-900",
     },
-    clean: {
+    "clean-minimal": {
       container: "bg-white font-sans",
       header:
         "bg-white border-b border-clean-border text-gray-400 font-sans text-[10px] tracking-wider font-bold",
@@ -54,7 +54,7 @@ const StandingsTable: React.FC<StandingsTableProps> = ({
       ptsClass: "text-clean-blue text-base",
     },
 
-    sporty: {
+    "sporty-energetic": {
       container: "bg-sporty-bg/30 rounded-lg overflow-hidden font-sporty",
       header:
         "bg-sporty-bg text-gray-400 font-header tracking-wider text-[11px]",
@@ -97,7 +97,7 @@ const StandingsTable: React.FC<StandingsTableProps> = ({
                   className={`grid grid-cols-12 gap-2 px-4 py-4 items-center transition-colors text-sm ${s.row}`}
                 >
                   <div className="col-span-4 truncate flex items-center gap-2">
-                    {variant === "sporty" && countryCode && (
+                    {variant === "sporty-energetic" && countryCode && (
                       <Flag countryCode={countryCode} />
                     )}
                     <span className="truncate">{teamName}</span>
@@ -110,7 +110,7 @@ const StandingsTable: React.FC<StandingsTableProps> = ({
                   <div className="col-span-2 flex items-center justify-center gap-1">
                     <span
                       className={`text-xs ${
-                        variant === "clean" ? "font-normal" : ""
+                        variant === "clean-minimal" ? "font-normal" : ""
                       }`}
                     >
                       {stat.wins}
@@ -121,7 +121,7 @@ const StandingsTable: React.FC<StandingsTableProps> = ({
                   <div className="col-span-2 flex items-center justify-center gap-1">
                     <span
                       className={`text-xs ${
-                        variant === "clean" ? "font-normal" : ""
+                        variant === "clean-minimal" ? "font-normal" : ""
                       }`}
                     >
                       {stat.draws}
@@ -132,7 +132,7 @@ const StandingsTable: React.FC<StandingsTableProps> = ({
                   <div className="col-span-2 flex items-center justify-center gap-1">
                     <span
                       className={`text-xs ${
-                        variant === "clean" ? "font-normal" : ""
+                        variant === "clean-minimal" ? "font-normal" : ""
                       }`}
                     >
                       {stat.losses}
@@ -152,7 +152,9 @@ const StandingsTable: React.FC<StandingsTableProps> = ({
             {standings.length === 0 && (
               <div
                 className={`p-8 text-center italic text-xs ${
-                  variant === "sporty" ? "text-gray-600" : "text-gray-400"
+                  variant === "sporty-energetic"
+                    ? "text-gray-600"
+                    : "text-gray-400"
                 }`}
               >
                 No data

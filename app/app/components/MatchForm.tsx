@@ -1,11 +1,12 @@
 import { Plus, X } from "lucide-react";
 import { useState, useMemo } from "react";
 import { useAppDispatch, useAppSelector, addMatch } from "../store/store";
-import { LeagueType, ThemeVariant } from "../types";
+import { LeagueType, Theme } from "../types";
+import { checkMatchExists } from "../utils/utils";
 
 interface MatchFormProps {
   league: LeagueType;
-  variant: ThemeVariant;
+  variant: Theme;
   mode?: "modal" | "inline";
 }
 
@@ -32,33 +33,26 @@ const MatchForm: React.FC<MatchFormProps> = ({
 
   const getVariantClasses = () => {
     switch (variant) {
-      case "table-green":
-        return {
-          btn: "btn-table-green",
-          input: "input-table-green",
-          card: "card-table-green",
-          label: "label-table",
-        };
-      case "table-purple":
+      case "table-centric":
         return {
           btn: "btn-table-purple",
           input: "input-table-purple",
           card: "card-table-purple",
           label: "label-table",
         };
-      case "clean":
+      case "clean-minimal":
         return {
-          btn: "btn-clean",
-          input: "input-clean",
-          card: "card-clean",
-          label: "label-clean",
+          btn: "btn-clean-minimal",
+          input: "input-clean-minimal",
+          card: "card-clean-minimal",
+          label: "label-clean-minimal",
         };
-      case "sporty":
+      case "sporty-energetic":
         return {
-          btn: "btn-sporty",
-          input: "input-sporty",
-          card: "card-sporty",
-          label: "label-sporty",
+          btn: "btn-sporty-energetic",
+          input: "input-sporty-energetic",
+          card: "card-sporty-energetic",
+          label: "label-sporty-energetic",
         };
       default:
         return {
@@ -86,12 +80,7 @@ const MatchForm: React.FC<MatchFormProps> = ({
       return;
     }
 
-    const matchExists = matches.some(
-      (m) =>
-        m.league === league &&
-        ((m.homeTeamId === homeId && m.awayTeamId === awayId) ||
-          (m.homeTeamId === awayId && m.awayTeamId === homeId))
-    );
+    const matchExists = checkMatchExists(matches, league, homeId, awayId);
 
     if (matchExists) {
       setError("Match already recorded.");
@@ -219,8 +208,10 @@ const MatchForm: React.FC<MatchFormProps> = ({
 
   if (mode === "inline") {
     return (
-      <div className={variant === "clean" ? "" : styles.card}>
-        {variant === "clean" && <h3 className={styles.label}>Add Score</h3>}
+      <div className={variant === "clean-minimal" ? "" : styles.card}>
+        {variant === "clean-minimal" && (
+          <h3 className={styles.label}>Add Score</h3>
+        )}
         {formContent}
       </div>
     );

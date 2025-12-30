@@ -1,4 +1,18 @@
-import { Match, Standing, Team } from "../types";
+import { Match, Standing, Team, LeagueType } from "../types";
+
+export const checkMatchExists = (
+  matches: Match[],
+  league: LeagueType,
+  homeId: string,
+  awayId: string
+): boolean => {
+  return matches.some(
+    (m) =>
+      m.league === league &&
+      ((m.homeTeamId === homeId && m.awayTeamId === awayId) ||
+        (m.homeTeamId === awayId && m.awayTeamId === homeId))
+  );
+};
 
 export const calculateStandings = (
   teams: Team[],

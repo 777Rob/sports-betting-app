@@ -1,10 +1,10 @@
 import { Plus, X } from "lucide-react";
 import { useState } from "react";
 import { useAppDispatch, addTeam, useAppSelector } from "../store/store";
-import { LeagueType, ThemeVariant } from "../types";
+import { LeagueType, Theme } from "../types";
 interface TeamFormProps {
   league: LeagueType;
-  variant: ThemeVariant;
+  variant: Theme;
   mode?: "modal" | "inline";
 }
 
@@ -101,8 +101,8 @@ const TeamForm: React.FC<TeamFormProps> = ({
 
   if (mode === "inline") {
     return (
-      <div className={variant === "clean" ? "" : `card-${variant}`}>
-        {variant === "clean" && (
+      <div className={variant === "clean-minimal" ? "" : `card-${variant}`}>
+        {variant === "clean-minimal" && (
           <h3
             className={
               variant.startsWith("table") ? "label-table" : `label-${variant}`

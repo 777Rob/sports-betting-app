@@ -39,6 +39,20 @@
   .label-table {
     @apply block mb-2 text-gray-500 font-mono uppercase tracking-wider text-[10px] font-bold;
   }
+  .btn-table-centric {
+    @apply flex items-center justify-center rounded transition-all duration-150 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply bg-table-green text-white font-mono text-xs uppercase tracking-wider font-bold py-3 hover:bg-[#003822];
+  }
+  .input-table-centric {
+    @apply w-full outline-none transition-all duration-150 focus:ring-1 focus:ring-current;
+    @apply px-4 py-3 rounded border border-gray-300 bg-white text-gray-900 font-mono text-sm shadow-sm focus:border-table-green focus:ring-table-green;
+  }
+  .card-table-centric {
+    @apply bg-white p-6 rounded-lg shadow-2xl border-t-4 border-table-green;
+  }
+  .label-table {
+    @apply block mb-2 text-gray-500 font-mono uppercase tracking-wider text-[10px] font-bold;
+  }
 
   /* --- Table Purple Theme --- */
   .btn-table-purple {
@@ -54,34 +68,34 @@
   }
 
   /* --- Clean Theme --- */
-  .btn-clean {
+  .btn-clean-minimal {
     @apply flex items-center justify-center rounded transition-all duration-150 cursor-pointer disabled:cursor-not-allowed;
     @apply bg-clean-blue text-white font-bold shadow-sm py-3 text-sm hover:bg-blue-600;
   }
-  .input-clean {
+  .input-clean-minimal {
     @apply w-full outline-none transition-all duration-150 focus:ring-1 focus:ring-current;
     @apply bg-clean-bg text-gray-800 text-sm px-4 py-3 rounded placeholder-gray-400 focus:ring-2 focus:ring-blue-100 border-none;
   }
-  .card-clean {
+  .card-clean-minimal {
     @apply bg-white p-8 rounded-lg shadow-xl;
   }
-  .label-clean {
+  .label-clean-minimal {
     @apply block mb-2 text-gray-900 font-bold text-[11px] uppercase tracking-wider;
   }
 
   /* --- Sporty Theme --- */
-  .btn-sporty {
+  .btn-sporty-energetic {
     @apply flex items-center justify-center rounded transition-all duration-150 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
     @apply bg-sporty-orange text-white font-header text-sm uppercase tracking-wider py-2 w-full hover:bg-orange-600;
   }
-  .input-sporty {
+  .input-sporty-energetic {
     @apply w-full outline-none transition-all duration-150 focus:ring-1 focus:ring-current;
     @apply bg-sporty-bg border border-gray-700 text-white px-4 py-3 rounded focus:border-sporty-orange;
   }
-  .card-sporty {
+  .card-sporty-energetic {
     @apply bg-sporty-card border border-gray-700 text-white p-8 rounded-xl shadow-2xl;
   }
-  .label-sporty {
+  .label-sporty-energetic {
     @apply block mb-2 text-sporty-orange font-header text-sm;
   }
 }

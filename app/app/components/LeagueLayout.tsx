@@ -70,10 +70,10 @@ const LeagueCard: React.FC<LeagueCardProps> = ({
         <div className="p-6 flex-1 flex flex-col gap-8 bg-white">
           <div className="flex gap-4">
             <div className="flex-1">
-              <TeamForm league={league} variant="table-green" />
+              <TeamForm league={league} variant="table-centric" />
             </div>
             <div className="flex-1">
-              <MatchForm league={league} variant="table-purple" />
+              <MatchForm league={league} variant="table-centric" />
             </div>
           </div>
           <div className="flex-1">
@@ -87,16 +87,16 @@ const LeagueCard: React.FC<LeagueCardProps> = ({
       return (
         <div className="p-6 flex-1 flex flex-col gap-8 bg-white">
           <div>
-            <TeamForm league={league} variant="clean" mode="inline" />
+            <TeamForm league={league} variant="clean-minimal" mode="inline" />
           </div>
           <div>
-            <MatchForm league={league} variant="clean" mode="inline" />
+            <MatchForm league={league} variant="clean-minimal" mode="inline" />
           </div>
           <div className="border rounded-md border-clean-border mt-2">
             <div className="bg-clean-bg px-4 py-3 border-b border-clean-border text-[10px] font-bold text-gray-500 uppercase tracking-wider">
               Standings
             </div>
-            <StandingsTable league={league} variant="clean" />
+            <StandingsTable league={league} variant="clean-minimal" />
           </div>
         </div>
       );
@@ -107,10 +107,10 @@ const LeagueCard: React.FC<LeagueCardProps> = ({
       <div className="p-6 pb-12 flex-1 flex flex-col gap-8">
         <div className="flex justify-between items-center gap-2">
           <div className="w-[48%]">
-            <TeamForm league={league} variant="sporty" />
+            <TeamForm league={league} variant="sporty-energetic" />
           </div>
           <div className="w-[48%]">
-            <MatchForm league={league} variant="sporty" />
+            <MatchForm league={league} variant="sporty-energetic" />
           </div>
         </div>
         <div>
@@ -123,7 +123,7 @@ const LeagueCard: React.FC<LeagueCardProps> = ({
           <h3 className="text-gray-400 font-bold text-xs uppercase tracking-widest mb-3">
             Score Table:
           </h3>
-          <StandingsTable league={league} variant="sporty" />
+          <StandingsTable league={league} variant="sporty-energetic" />
         </div>
       </div>
     );
