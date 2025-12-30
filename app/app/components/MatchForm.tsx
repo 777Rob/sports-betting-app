@@ -1,24 +1,24 @@
 import { Plus, X } from "lucide-react";
 import { useState, useMemo } from "react";
 import { useAppDispatch, useAppSelector, addMatch } from "../store/store";
-import { LeagueType, Theme } from "../types";
+import { LeagueType, Team, Theme } from "../types";
 import { checkMatchExists } from "../utils/utils";
 
-interface MatchFormProps {
+interface FormContentProps {
+  mode: string;
+  variant: string;
   league: LeagueType;
-  variant: Theme;
-  mode?: "modal" | "inline";
+  setIsExpanded: (expanded: boolean) => void;
 }
 
-const MatchForm: React.FC<MatchFormProps> = ({
-  league,
+const FormContent: React.FC<FormContentProps> = ({
+  mode,
   variant,
-  mode = "modal",
+  league,
+  setIsExpanded,
 }) => {
   const dispatch = useAppDispatch();
   const { teams, matches } = useAppSelector((state) => state.app);
-
-  const [isExpanded, setIsExpanded] = useState(false);
 
   const [homeId, setHomeId] = useState("");
   const [awayId, setAwayId] = useState("");
@@ -69,7 +69,7 @@ const MatchForm: React.FC<MatchFormProps> = ({
     if (mode === "modal") setIsExpanded(false);
   };
 
-  const formContent = (
+  return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-3">
       {error && (
         <div className="bg-red-50 border border-red-200 text-red-600 text-xs p-2 rounded text-center font-bold">
@@ -173,6 +173,20 @@ const MatchForm: React.FC<MatchFormProps> = ({
       </div>
     </form>
   );
+};
+
+interface MatchFormProps {
+  league: LeagueType;
+  variant: Theme;
+  mode?: "modal" | "inline";
+}
+
+const MatchForm: React.FC<MatchFormProps> = ({
+  league,
+  variant,
+  mode = "modal",
+}) => {
+  const [isExpanded, setIsExpanded] = useState(false);
 
   if (mode === "inline") {
     return (
@@ -180,7 +194,12 @@ const MatchForm: React.FC<MatchFormProps> = ({
         {variant === "clean-minimal" && (
           <h3 className={`label-${variant}`}>Add Score</h3>
         )}
-        {formContent}
+        <FormContent
+          league={league}
+          variant={variant}
+          mode={mode}
+          setIsExpanded={setIsExpanded}
+        />
       </div>
     );
   }
@@ -204,7 +223,6 @@ const MatchForm: React.FC<MatchFormProps> = ({
             >
               <X size={20} />
             </button>
-
             <h3
               className={`text-lg mb-6 font-bold ${
                 variant.startsWith("table")
@@ -214,8 +232,12 @@ const MatchForm: React.FC<MatchFormProps> = ({
             >
               Record Score
             </h3>
-
-            {formContent}
+            <FormContent
+              league={league}
+              variant={variant}
+              mode={mode}
+              setIsExpanded={setIsExpanded}
+            />{" "}
           </div>
         </div>
       )}
